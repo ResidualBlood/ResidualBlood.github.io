@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>版本合并 - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/%E7%89%88%E6%9C%AC%E5%90%88%E5%B9%B6/</link>
+        <description>版本合并 - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 23 Dec 2020 22:05:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/%E7%89%88%E6%9C%AC%E5%90%88%E5%B9%B6/" rel="self" type="application/rss+xml" /><item>
+    <title>Github进行fork后与原仓库同步</title>
+    <link>https://hugo.lwnlh.com/github%E8%BF%9B%E8%A1%8Cfork%E5%90%8E%E4%B8%8E%E5%8E%9F%E4%BB%93%E5%BA%93%E5%90%8C%E6%AD%A5/</link>
+    <pubDate>Wed, 23 Dec 2020 22:05:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/github%E8%BF%9B%E8%A1%8Cfork%E5%90%8E%E4%B8%8E%E5%8E%9F%E4%BB%93%E5%BA%93%E5%90%8C%E6%AD%A5/</guid>
+    <description><![CDATA[本文主要讲述Github进行fork后如何与原仓库同步，即版本合并；其有两种方法，分别为：本地合并、Github合并 主要参照：https:/]]></description>
+</item>
+</channel>
+</rss>

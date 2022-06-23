@@ -1,0 +1,89 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/</link>
+        <description>这是我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 May 2022 07:46:00 &#43;0000</lastBuildDate>
+            <atom:link href="https://hugo.lwnlh.com/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>做了一个好梦</title>
+    <link>https://hugo.lwnlh.com/%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%A2%A6/</link>
+    <pubDate>Tue, 10 May 2022 07:46:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%A2%A6/</guid>
+    <description><![CDATA[总结 萝莉富婆 登月]]></description>
+</item>
+<item>
+    <title>ZeriTier安装使用、自建MOON节点、进阶使用</title>
+    <link>https://hugo.lwnlh.com/zeritier%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E8%87%AA%E5%BB%BAmoon%E8%8A%82%E7%82%B9%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/</link>
+    <pubDate>Wed, 17 Nov 2021 11:22:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/zeritier%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8%E8%87%AA%E5%BB%BAmoon%E8%8A%82%E7%82%B9%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/</guid>
+    <description><![CDATA[本文主要介绍内网穿透工具ZeroTier使用方法，全文总分为三大部分：第一部分为基本安装使用、第二部分为自建MOON节点，第三部分为进阶使用]]></description>
+</item>
+<item>
+    <title>Hetnzer 安装 Proxmox 开小鸡教程 - 安装篇</title>
+    <link>https://hugo.lwnlh.com/hetnzer-%E5%AE%89%E8%A3%85-proxmox-%E5%BC%80%E5%B0%8F%E9%B8%A1%E6%95%99%E7%A8%8B---%E5%AE%89%E8%A3%85%E7%AF%87/</link>
+    <pubDate>Mon, 13 Sep 2021 15:21:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/hetnzer-%E5%AE%89%E8%A3%85-proxmox-%E5%BC%80%E5%B0%8F%E9%B8%A1%E6%95%99%E7%A8%8B---%E5%AE%89%E8%A3%85%E7%AF%87/</guid>
+    <description><![CDATA[此系列主要记录 Hetnzer 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境 本文为此系列第一篇 主要记录 Proxmox 的安装，]]></description>
+</item>
+<item>
+    <title>小米平板5 Pro ROOT</title>
+    <link>https://hugo.lwnlh.com/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5-pro-root/</link>
+    <pubDate>Tue, 24 Aug 2021 19:55:18 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5-pro-root/</guid>
+    <description><![CDATA[本文主要记录 小米平板5 Root 的各种问题 一句话 Root 替换 boot.img 完事 Magisk SafetyNet 检查 CTS Profile 失败 下载ZIP包，Maagisk刷入，重启解决]]></description>
+</item>
+<item>
+    <title>Samsung Pay突然无法联网</title>
+    <link>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</link>
+    <pubDate>Sun, 04 Apr 2021 16:17:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</guid>
+    <description><![CDATA[状况 Samsung Pay之前一直用的好好的，但是这几天发现交通卡充值，银行卡二维码一直提示：网络错误，无法连接至网络；网络明明正常啊.jpg 解决 尝试百般]]></description>
+</item>
+<item>
+    <title>Github进行fork后与原仓库同步</title>
+    <link>https://hugo.lwnlh.com/github%E8%BF%9B%E8%A1%8Cfork%E5%90%8E%E4%B8%8E%E5%8E%9F%E4%BB%93%E5%BA%93%E5%90%8C%E6%AD%A5/</link>
+    <pubDate>Wed, 23 Dec 2020 22:05:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/github%E8%BF%9B%E8%A1%8Cfork%E5%90%8E%E4%B8%8E%E5%8E%9F%E4%BB%93%E5%BA%93%E5%90%8C%E6%AD%A5/</guid>
+    <description><![CDATA[本文主要讲述Github进行fork后如何与原仓库同步，即版本合并；其有两种方法，分别为：本地合并、Github合并 主要参照：https:/]]></description>
+</item>
+<item>
+    <title>Clash自定义分流规则</title>
+    <link>https://hugo.lwnlh.com/clash%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E6%B5%81%E8%A7%84%E5%88%99/</link>
+    <pubDate>Tue, 22 Dec 2020 22:10:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/clash%E8%87%AA%E5%AE%9A%E4%B9%89%E5%88%86%E6%B5%81%E8%A7%84%E5%88%99/</guid>
+    <description><![CDATA[本文主要讲述如何在ACL4SSR的Clash规则基础上魔改出适合自己的规则配置文件，并方便前文订阅转换的调用 ACL4SSR项目地址：http]]></description>
+</item>
+<item>
+    <title>自建Clash订阅转换</title>
+    <link>https://hugo.lwnlh.com/%E8%87%AA%E5%BB%BAclash%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</link>
+    <pubDate>Tue, 22 Dec 2020 20:45:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E8%87%AA%E5%BB%BAclash%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</guid>
+    <description><![CDATA[本文主要说明Clash订阅转换：Docker搭建后端处理subconverter，以及前端Sub-Web，并利用Nginx反代 2020年12]]></description>
+</item>
+<item>
+    <title>利用SSH跳板机连接内网服务器</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8ssh%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <pubDate>Fri, 11 Sep 2020 19:00:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8ssh%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+    <description><![CDATA[一、前言 由于本地网络环境实在太差，VSCode Remote 连接编译机无限重试，所以就用ssh跳板抢救一下。 所有命令基于open-ssh 二、直接连接 1 ssh]]></description>
+</item>
+<item>
+    <title>在Linux(Manjaro)上使用MIDI键盘</title>
+    <link>https://hugo.lwnlh.com/%E5%9C%A8linuxmanjaro%E4%B8%8A%E4%BD%BF%E7%94%A8midi%E9%94%AE%E7%9B%98/</link>
+    <pubDate>Sat, 07 Mar 2020 19:36:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%9C%A8linuxmanjaro%E4%B8%8A%E4%BD%BF%E7%94%A8midi%E9%94%AE%E7%9B%98/</guid>
+    <description><![CDATA[记录下在Manjaro上使用MIDI键盘的操作。主要参考Arch wiki的USB MIDI keyboards部分。 ##准备工作 ###确认你的声卡驱动]]></description>
+</item>
+</channel>
+</rss>

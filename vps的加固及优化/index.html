@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VPS的加固及优化 - 我的全新 Hugo 网站</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="VPS的加固及优化" />
+<meta property="og:description" content="#VPS加固 ##一、SSH防爆破 顾名思义，防止SSH密码被爆破以及减小VPS压力。 这里我们使用fail2ban，各位应该都听说过这个程序，可" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" /><meta property="og:image" content="https://hugo.lwnlh.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-11-28T19:57:00+00:00" />
+<meta property="article:modified_time" content="2018-11-28T19:57:00+00:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hugo.lwnlh.com/logo.png"/>
+
+<meta name="twitter:title" content="VPS的加固及优化"/>
+<meta name="twitter:description" content="#VPS加固 ##一、SSH防爆破 顾名思义，防止SSH密码被爆破以及减小VPS压力。 这里我们使用fail2ban，各位应该都听说过这个程序，可"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" /><link rel="prev" href="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" /><link rel="next" href="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VPS的加固及优化",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/hugo.lwnlh.com\/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96\/"
+        },"genre": "posts","keywords": "VPS, fail2ban, BBR, 密钥","wordcount":  1487 ,
+        "url": "https:\/\/hugo.lwnlh.com\/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96\/","datePublished": "2018-11-28T19:57:00+00:00","dateModified": "2018-11-28T19:57:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VPS的加固及优化</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B9%B2%E8%B4%A7/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>干货</a>&nbsp;<a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-11-28">2018-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1487 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>#VPS加固
+##一、SSH防爆破
+顾名思义，防止SSH密码被爆破以及减小VPS压力。
+这里我们使用<code>fail2ban</code>，各位应该都听说过这个程序，可以根据SSH登录失败记录来屏蔽某个IP，该脚本有以下几个功能：</p>
+<ol>
+<li>自助修改SSH端口</li>
+<li>自定义SSH尝试连接次数</li>
+<li>自定义最高封禁IP的时间（以小时为单位）</li>
+<li>一键完成SSH防止暴力破解
+###安装
+运行命令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate https://raw.githubusercontent.com/FunctionClub/Fail2ban/master/fail2ban.sh <span class="o">&amp;&amp;</span> bash fail2ban.sh 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> tee fail2ban.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据提示输入相应信息;</p>
+<ol>
+<li>第一步：选择是否修改SSH端口。</li>
+<li>第二步：输入最多尝试输入SSH连接密码的次数</li>
+<li>第三步：输入每个恶意IP的封禁时间（单位：小时） 
+###卸载
+运行命令</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate https://raw.githubusercontent.com/FunctionClub/Fail2ban/master/uninstall.sh <span class="o">&amp;&amp;</span> bash uninstall.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意事项：</p>
+<ol>
+<li>如果你需要更改SSH端口，请记得在防火墙或者安全组中开放新的SSH端口</li>
+<li>安装完成后请会重启SSH服务，请重新连接SSH会话</li>
+<li>若出现SSH无法连接的情况，请检查是否修改过SSH端口，请填写写改后的正确端口进行连接</li>
+</ol>
+<blockquote>
+<p>反正我是没用这个，因为之前有一次把我自己的IP屏蔽了一天，23333
+##二、使用密钥登录VPS
+密钥的安全性可谓是远大于密码登录，所以，为什么不使用密钥登录呢？还不用担心自己把自己ban掉&hellip;&hellip;
+###生成密钥对
+在你的VPS或者本地Linux系统运行命令：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh-keygen -t rsa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过上述方式，密钥生成在<code>/root/.ssh</code>或<code>/你的用户根目录/.ssh</code>下，分别为私钥和公钥文件，公钥文件<code>id_rsa.pub</code>就是在接下来需要放置在要VPS的文件，而<code>id_rsa</code>就是要保存到本地的私钥文件。
+###将密钥保存到VPS
+我们需要将<code>id_rsa.pub</code>公钥文件放置到VPS用户主目录<code>/root/.ssh</code>下，可以使用<code>scp</code>命令，例：<code>scp 本地文件 用户名@VPS地址：远程文件路径</code>，之后我们需要进行一下操作</p>
+<ol>
+<li>将<code>id_rsa.pub</code>文件，重命名为 <code>authorized_keys</code>;</li>
+<li>执行<code>chmod 600 ./authorized_keys</code> 命令，修改权限；</li>
+<li>执行命令 <code>sudo nano /etc/ssh/sshd_config</code>进行配置，将<code>RSAAuthentication</code> 和 <code>PubkeyAuthentication</code> 后面的值都改成<code>yes</code> ，将<code>PasswordAuthentication yes </code>修改成 <code>PasswordAuthentication no</code>，然后保存；</li>
+<li>重启sshd服务，Debian/Ubuntu执行<code>sudo /etc/init.d/ssh restart </code>；</li>
+<li>CentOS执行：<code>sudo /etc/init.d/sshd restart</code>；</li>
+<li>注：centos7重启服务方式与以前不同，请执行<code>systemctl restart sshd.service</code>。</li>
+</ol>
+<p>最后，你就可以使用密钥登录你的VPS了～</p>
+<blockquote>
+<p>这是一般VPS的修改方法，但是类似Google Cloud之类的实在你创建实例之前就让你填写公钥的。</p>
+</blockquote>
+<p>#VPS优化
+这里主要讲解开启魔改版BBR，为什么是魔改版呢？从玄学角度讲因为它比普通版更快呀～
+##普通VPS开启魔改版BBR
+首先，我们要确认一下VPS是否能开启BBR，可以直接使用此命令进行开启</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate -qO <span class="s1">&#39;BBR.sh&#39;</span> <span class="s1">&#39;https://moeclub.org/attachment/LinuxShell/BBR.sh&#39;</span> <span class="o">&amp;&amp;</span> chmod a+x BBR.sh <span class="o">&amp;&amp;</span> bash BBR.sh -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注意:执行此命令会自动重启.</strong>
+之后我们执行以下命令安装魔改版BBR</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --no-check-certificate -qO <span class="s1">&#39;BBR_POWERED.sh&#39;</span> <span class="s1">&#39;https://moeclub.org/attachment/LinuxShell/BBR_POWERED.sh&#39;</span> <span class="o">&amp;&amp;</span> chmod a+x BBR_POWERED.sh <span class="o">&amp;&amp;</span> bash BBR_POWERED.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后执行<code>lsmod |grep 'bbr_powered'</code>，如返回结果不为空，则安装成功。</p>
+<p>##Google Cloud开启魔改版BBR
+Google Cloud使用上面方法开启魔改版BBR会失败，原因以后再说，这里先立个Flag&hellip;&hellip;
+对于Google Cloud，我们需要使用以下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/YankeeBBR/master/bbr.sh <span class="o">&amp;&amp;</span> bash bbr.sh install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装过程中如果出现这张图片，请选择NO 来删除其他内核(原谅我无耻的盗个图)：<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxo0ts498sj30st0j2q3r.jpg" />
+然后根据提示重启系统，之后运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash bbr.sh start
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即可启用魔改版BBR。
+###查看魔改BBR状态
+运行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sysctl net.ipv4.tcp_available_congestion_control
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果看到有<code>tsunami</code>就表示开启成功！ 
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxo0wqrkwsj30mp014t8o.jpg" /></p>
+<blockquote>
+<p><strong>参考</strong>
+<a href="https://www.iwwenbo.com/linux-ssh-authorized-keys-login/" target="_blank" rel="noopener noreffer ">使用SSH密钥登录让Linux VPS服务器更安全</a>
+<a href="https://moeclub.org/2017/06/24/278/?v=417" target="_blank" rel="noopener noreffer ">Debian/Ubuntu TCP BBR 改进版/增强版/魔改版</a>
+<a href="https://ylws.me/tech/68.html" target="_blank" rel="noopener noreffer ">魔改版BBR一键安装脚本 For Debian8 / Ubuntu16 +</a></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-11-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" data-title="VPS的加固及优化" data-via="xxxx" data-hashtags="VPS,fail2ban,BBR,密钥"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" data-hashtag="VPS"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" data-title="VPS的加固及优化"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" data-title="VPS的加固及优化"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" data-title="VPS的加固及优化"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vps/">VPS</a>,&nbsp;<a href="/tags/fail2ban/">fail2ban</a>,&nbsp;<a href="/tags/bbr/">BBR</a>,&nbsp;<a href="/tags/%E5%AF%86%E9%92%A5/">密钥</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" class="prev" rel="prev" title="VPS选择，测试，升级"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VPS选择，测试，升级</a>
+            <a href="/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" class="next" rel="next" title="利用OneinStack搭建LNMP网站环境">利用OneinStack搭建LNMP网站环境<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.102.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

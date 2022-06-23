@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Samsung Pay - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/samsung-pay/</link>
+        <description>Samsung Pay - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 04 Apr 2021 16:17:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/samsung-pay/" rel="self" type="application/rss+xml" /><item>
+    <title>Samsung Pay突然无法联网</title>
+    <link>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</link>
+    <pubDate>Sun, 04 Apr 2021 16:17:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</guid>
+    <description><![CDATA[状况 Samsung Pay之前一直用的好好的，但是这几天发现交通卡充值，银行卡二维码一直提示：网络错误，无法连接至网络；网络明明正常啊.jpg 解决 尝试百般]]></description>
+</item>
+</channel>
+</rss>

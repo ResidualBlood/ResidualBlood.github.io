@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>MIDI - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/midi/</link>
+        <description>MIDI - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 07 Mar 2020 19:36:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/midi/" rel="self" type="application/rss+xml" /><item>
+    <title>在Linux(Manjaro)上使用MIDI键盘</title>
+    <link>https://hugo.lwnlh.com/%E5%9C%A8linuxmanjaro%E4%B8%8A%E4%BD%BF%E7%94%A8midi%E9%94%AE%E7%9B%98/</link>
+    <pubDate>Sat, 07 Mar 2020 19:36:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%9C%A8linuxmanjaro%E4%B8%8A%E4%BD%BF%E7%94%A8midi%E9%94%AE%E7%9B%98/</guid>
+    <description><![CDATA[记录下在Manjaro上使用MIDI键盘的操作。主要参考Arch wiki的USB MIDI keyboards部分。 ##准备工作 ###确认你的声卡驱动]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>PHP - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/php/</link>
+        <description>PHP - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 01 Dec 2018 12:01:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/php/" rel="self" type="application/rss+xml" /><item>
+    <title>利用OneinStack搭建LNMP网站环境</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/</link>
+    <pubDate>Sat, 01 Dec 2018 12:01:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/</guid>
+    <description><![CDATA[作者言：没啥营养，不看也罢&hellip;&hellip; #一、安装 这里提供两种方式安装 ##图形化安装 这里我们使用 官网 的一键脚本安装。在下图]]></description>
+</item>
+</channel>
+</rss>

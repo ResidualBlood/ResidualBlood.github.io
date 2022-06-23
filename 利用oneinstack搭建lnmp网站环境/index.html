@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>利用OneinStack搭建LNMP网站环境 - 我的全新 Hugo 网站</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="利用OneinStack搭建LNMP网站环境" />
+<meta property="og:description" content="作者言：没啥营养，不看也罢&hellip;&hellip; #一、安装 这里提供两种方式安装 ##图形化安装 这里我们使用 官网 的一键脚本安装。在下图" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" /><meta property="og:image" content="https://hugo.lwnlh.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-12-01T12:01:00+00:00" />
+<meta property="article:modified_time" content="2018-12-01T12:01:00+00:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hugo.lwnlh.com/logo.png"/>
+
+<meta name="twitter:title" content="利用OneinStack搭建LNMP网站环境"/>
+<meta name="twitter:description" content="作者言：没啥营养，不看也罢&hellip;&hellip; #一、安装 这里提供两种方式安装 ##图形化安装 这里我们使用 官网 的一键脚本安装。在下图"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" /><link rel="prev" href="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" /><link rel="next" href="https://hugo.lwnlh.com/%E4%BC%AA-nas-%E5%88%A9%E7%94%A8vps%E5%AE%9E%E7%8E%B0%E5%A4%87%E4%BB%BD%E4%B8%8B%E8%BD%BD%E4%B8%B2%E6%B5%81%E6%92%AD%E6%94%BE%E4%B8%80%E6%9D%A1%E9%BE%99%E4%B8%8A/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "利用OneinStack搭建LNMP网站环境",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/hugo.lwnlh.com\/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83\/"
+        },"genre": "posts","keywords": "LNMP, OneinStack, 虚拟主机, Nginx, PHP","wordcount":  415 ,
+        "url": "https:\/\/hugo.lwnlh.com\/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83\/","datePublished": "2018-12-01T12:01:00+00:00","dateModified": "2018-12-01T12:01:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">利用OneinStack搭建LNMP网站环境</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B9%B2%E8%B4%A7/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>干货</a>&nbsp;<a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>折腾</a>&nbsp;<a href="/categories/%E5%88%86%E4%BA%AB/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>分享</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-12-01">2018-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;415 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>作者言：没啥营养，不看也罢&hellip;&hellip;
+#一、安装
+这里提供两种方式安装
+##图形化安装
+这里我们使用 <a href="https://oneinstack.com/auto/" target="_blank" rel="noopener noreffer ">官网</a> 的一键脚本安装。在下图中选择你所需要的功能，然后复制安装命令到你的VPS上运行即可。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxr44q36e3j30wd0w9q5n.jpg" />
+##终端安装
+首先，我们要安装一下所需要的软件包</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt-get -y install wget screen curl python
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接着下载所需要的一键脚本，解压</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://mirrors.linuxeye.com/oneinstack.tar.gz
+</span></span><span class="line"><span class="cl">tar xzf oneinstack.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后进入解压后的文件中
+执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">screen -S lnmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>防止SSH连接中断导致安装失败,最后运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./install.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来
+按照按照提示选择你所需要的组件（又见盗图23333）
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxr4g2v2ywj318o2m4akq.jpg" />
+#二、添加虚拟主机
+运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./vhost.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后按照提示配置你的虚拟主机
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxr4hgxo0hj318o2707ej.jpg" />
+#三、删除虚拟主机
+运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./vhost.sh del
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后按照提示输入即可
+#四、管理服务
+<strong>Nginx/Tengine/OpenResty:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service nginx {start|stop|status|restart|reload|configtest}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>MySQL/MariaDB/Percona:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service mysqld {start|stop|restart|reload|status}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>PHP:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service php-fpm {start|stop|restart|reload|status}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Apache:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service httpd {start|restart|stop}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>HHVM:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service supervisord {start|stop|status|restart|reload}
+</span></span><span class="line"><span class="cl">注：hhvm进程交给supervisord管理，了解更多请访问《Supervisor管理hhvm进程》
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Pure-Ftpd:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service pureftpd {start|stop|restart|status}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Redis:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service redis-server {start|stop|status|restart|reload}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Memcached:</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service memcached {start|stop|status|restart|reload}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>#五、大版本更新
+运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./upgrade.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>按照提示输入即可</p>
+<blockquote>
+<p><strong>参考</strong> 
+<a href="https://blog.linuxeye.cn/31.html" target="_blank" rel="noopener noreffer ">lnmp、lamp、lnmpa一键安装包</a>
+<a href="https://oneinstack.com/download/" target="_blank" rel="noopener noreffer ">OneinStack</a></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-12-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" data-title="利用OneinStack搭建LNMP网站环境" data-via="xxxx" data-hashtags="LNMP,OneinStack,虚拟主机,Nginx,PHP"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" data-hashtag="LNMP"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" data-title="利用OneinStack搭建LNMP网站环境"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" data-title="利用OneinStack搭建LNMP网站环境"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/" data-title="利用OneinStack搭建LNMP网站环境"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/lnmp/">LNMP</a>,&nbsp;<a href="/tags/oneinstack/">OneinStack</a>,&nbsp;<a href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA/">虚拟主机</a>,&nbsp;<a href="/tags/nginx/">Nginx</a>,&nbsp;<a href="/tags/php/">PHP</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" class="prev" rel="prev" title="VPS的加固及优化"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VPS的加固及优化</a>
+            <a href="/%E4%BC%AA-nas-%E5%88%A9%E7%94%A8vps%E5%AE%9E%E7%8E%B0%E5%A4%87%E4%BB%BD%E4%B8%8B%E8%BD%BD%E4%B8%B2%E6%B5%81%E6%92%AD%E6%94%BE%E4%B8%80%E6%9D%A1%E9%BE%99%E4%B8%8A/" class="next" rel="next" title="伪-NAS 利用VPS实现备份、下载、串流播放一条龙(上)">伪-NAS 利用VPS实现备份、下载、串流播放一条龙(上)<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.102.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

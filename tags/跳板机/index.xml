@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>跳板机 - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/%E8%B7%B3%E6%9D%BF%E6%9C%BA/</link>
+        <description>跳板机 - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 11 Sep 2020 19:00:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/%E8%B7%B3%E6%9D%BF%E6%9C%BA/" rel="self" type="application/rss+xml" /><item>
+    <title>利用SSH跳板机连接内网服务器</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8ssh%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+    <pubDate>Fri, 11 Sep 2020 19:00:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8ssh%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+    <description><![CDATA[一、前言 由于本地网络环境实在太差，VSCode Remote 连接编译机无限重试，所以就用ssh跳板抢救一下。 所有命令基于open-ssh 二、直接连接 1 ssh]]></description>
+</item>
+</channel>
+</rss>

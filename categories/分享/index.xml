@@ -1,0 +1,43 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>分享 - Category - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/categories/%E5%88%86%E4%BA%AB/</link>
+        <description>分享 - Category - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 04 Apr 2021 16:17:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/categories/%E5%88%86%E4%BA%AB/" rel="self" type="application/rss+xml" /><item>
+    <title>Samsung Pay突然无法联网</title>
+    <link>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</link>
+    <pubDate>Sun, 04 Apr 2021 16:17:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/samsung-pay%E7%AA%81%E7%84%B6%E6%97%A0%E6%B3%95%E8%81%94%E7%BD%91/</guid>
+    <description><![CDATA[状况 Samsung Pay之前一直用的好好的，但是这几天发现交通卡充值，银行卡二维码一直提示：网络错误，无法连接至网络；网络明明正常啊.jpg 解决 尝试百般]]></description>
+</item>
+<item>
+    <title>利用Pxder批量下载P站你收藏的插画</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8pxder%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDp%E7%AB%99%E4%BD%A0%E6%94%B6%E8%97%8F%E7%9A%84%E6%8F%92%E7%94%BB/</link>
+    <pubDate>Fri, 11 Jan 2019 19:06:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8pxder%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDp%E7%AB%99%E4%BD%A0%E6%94%B6%E8%97%8F%E7%9A%84%E6%8F%92%E7%94%BB/</guid>
+    <description><![CDATA[<blockquote>
+<p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，
+其开源地址为：<a href="https://github.com/Tsuk1ko/pxder" target="_blank" rel="noopener noreffer ">https://github.com/Tsuk1ko/pxder</a>
+本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址</p>
+</blockquote>]]></description>
+</item>
+<item>
+    <title>利用YouTube-dl优雅地下载YouTube视频</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8youtube-dl%E4%BC%98%E9%9B%85%E5%9C%B0%E4%B8%8B%E8%BD%BDyoutube%E8%A7%86%E9%A2%91/</link>
+    <pubDate>Tue, 08 Jan 2019 17:43:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8youtube-dl%E4%BC%98%E9%9B%85%E5%9C%B0%E4%B8%8B%E8%BD%BDyoutube%E8%A7%86%E9%A2%91/</guid>
+    <description><![CDATA[下载的视频仅作为交流学习收藏哦，不要作为商用！ “YouTube-dl”是一个不仅可以下载YouTube视频，还可以下载哔哩哔哩等视频的命令行]]></description>
+</item>
+<item>
+    <title>利用OneinStack搭建LNMP网站环境</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/</link>
+    <pubDate>Sat, 01 Dec 2018 12:01:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8oneinstack%E6%90%AD%E5%BB%BAlnmp%E7%BD%91%E7%AB%99%E7%8E%AF%E5%A2%83/</guid>
+    <description><![CDATA[作者言：没啥营养，不看也罢&hellip;&hellip; #一、安装 这里提供两种方式安装 ##图形化安装 这里我们使用 官网 的一键脚本安装。在下图]]></description>
+</item>
+</channel>
+</rss>

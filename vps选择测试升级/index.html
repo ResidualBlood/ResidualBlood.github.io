@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>VPS选择，测试，升级 - 我的全新 Hugo 网站</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="VPS选择，测试，升级" />
+<meta property="og:description" content="作者言 扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&hellip;&hellip; #VPS的选择 如何选择VP" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" /><meta property="og:image" content="https://hugo.lwnlh.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-11-28T19:14:00+00:00" />
+<meta property="article:modified_time" content="2018-11-28T19:14:00+00:00" /><meta property="og:site_name" content="我的网站" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://hugo.lwnlh.com/logo.png"/>
+
+<meta name="twitter:title" content="VPS选择，测试，升级"/>
+<meta name="twitter:description" content="作者言 扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&hellip;&hellip; #VPS的选择 如何选择VP"/>
+<meta name="application-name" content="我的网站">
+<meta name="apple-mobile-web-app-title" content="我的网站"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" /><link rel="prev" href="https://hugo.lwnlh.com/start/" /><link rel="next" href="https://hugo.lwnlh.com/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "VPS选择，测试，升级",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/hugo.lwnlh.com\/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7\/"
+        },"genre": "posts","keywords": "VPS, 测试","wordcount":  814 ,
+        "url": "https:\/\/hugo.lwnlh.com\/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7\/","datePublished": "2018-11-28T19:14:00+00:00","dateModified": "2018-11-28T19:14:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "xxxx"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站"></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站"></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">VPS选择，测试，升级</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>xxxx</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B9%B2%E8%B4%A7/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>干货</a>&nbsp;<a href="/categories/%E6%8A%98%E8%85%BE/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>折腾</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-11-28">2018-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;814 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>作者言
+扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&hellip;&hellip;
+#VPS的选择
+如何选择VPS，第一要素自然是是看延迟咯，所以我们先上 <a href="https://www.msmbps.com/" target="_blank" rel="noopener noreffer ">这个</a> 网站测试下你到一些常见的VPS供应商机房的延迟，下面给张图：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg" /></p>
+</blockquote>
+<p>测完延迟后就选一款适合你的&hellip;..</p>
+<blockquote>
+<p>测试网站的开源地址：<a href="https://github.com/msmbps/msmbps" target="_blank" rel="noopener noreffer ">https://github.com/msmbps/msmbps</a>
+#VPS的测试
+这里我们使用<a href="https://teddysun.com/444.html" target="_blank" rel="noopener noreffer ">秋水逸冰</a>大佬的一键测试脚本来进行VPS性能的测试
+命令：</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -qO- bench.sh <span class="p">|</span> bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -Lso- bench.sh <span class="p">|</span> bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>备注</strong>
+<code>bench.sh</code> 既是脚本名，同时又是域名。
+给个图：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg"
+        data-srcset="https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg, https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg 1.5x, https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg 2x"
+        data-sizes="auto"
+        alt="https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg"
+        title="https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg" />
+测试完了，感觉还可以就留着，不行的的话就该退款退款，该换就换，千万别凑活着用，给自己找不自在，最后还发工单撕&hellip;..
+#系统大版本升级
+有时候，VPS商家给的系统模板并不是最新的，这时候我们就需要手动升级下系统（本文Ubuntu向）
+首先，我们需要升级下软件包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>接着安装<code>update-manager-core</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install update-manager-core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后打开文件<code>/etc/update-manager/release-upgrades</code>，确认<code>Prompt</code>的值设定为<code>lts</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Default behavior for the release upgrader.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>DEFAULT<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Default prompting behavior, valid options:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  never  - Never check for a new release.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  normal - Check to see if a new release is available.  If more than one new</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           release is found, the release upgrader will attempt to upgrade to</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           the release that immediately succeeds the currently-running</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           release.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  lts    - Check to see if a new LTS release is available.  The upgrader</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           will attempt to upgrade to the first LTS release available after</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           the currently-running one.  Note that this option should not be</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           used if the currently-running release is not itself an LTS</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           release, since in that case the upgrader won&#39;t be able to</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#           determine if a newer release is available.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Prompt</span><span class="o">=</span>lts
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>确认完毕后，我们需要处理一下可能阻碍升级的依赖关系，所以运行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get dist-upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，一切准备就绪，使用Ubuntu的发行工具执行升级</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo <span class="k">do</span>-release-upgrade
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo <span class="k">do</span>-release-upgrade -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>至此，静待系统升级完毕，期间需要重启系统，重启完毕后，使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lsb_release -a
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到你的系统升级后的版本</p>
+<blockquote>
+<p><strong>参考</strong>
+<a href="https://teddysun.com/444.html" target="_blank" rel="noopener noreffer ">秋水逸冰一键测试脚本bench.sh</a>
+<a href="https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-ubuntu-16-04-lts" target="_blank" rel="noopener noreffer ">How To Upgrade to Ubuntu 16.04 LTS</a>
+<a href="https://www.daweibro.com/node/154" target="_blank" rel="noopener noreffer ">Linode VPS从Ubuntu Server 14.04LTS升级到Ubuntu Server 16.04LTS</a></p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-11-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" data-title="VPS选择，测试，升级" data-via="xxxx" data-hashtags="VPS,测试"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" data-hashtag="VPS"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" data-title="VPS选择，测试，升级"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" data-title="VPS选择，测试，升级"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/" data-title="VPS选择，测试，升级"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vps/">VPS</a>,&nbsp;<a href="/tags/%E6%B5%8B%E8%AF%95/">测试</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/start/" class="prev" rel="prev" title="Start"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Start</a>
+            <a href="/vps%E7%9A%84%E5%8A%A0%E5%9B%BA%E5%8F%8A%E4%BC%98%E5%8C%96/" class="next" rel="next" title="VPS的加固及优化">VPS的加固及优化<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.102.0-DEV">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">xxxx</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

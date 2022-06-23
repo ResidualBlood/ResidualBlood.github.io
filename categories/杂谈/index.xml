@@ -1,0 +1,31 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>杂谈 - Category - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/categories/%E6%9D%82%E8%B0%88/</link>
+        <description>杂谈 - Category - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 10 May 2022 07:46:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/categories/%E6%9D%82%E8%B0%88/" rel="self" type="application/rss+xml" /><item>
+    <title>做了一个好梦</title>
+    <link>https://hugo.lwnlh.com/%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%A2%A6/</link>
+    <pubDate>Tue, 10 May 2022 07:46:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E5%A5%BD%E6%A2%A6/</guid>
+    <description><![CDATA[总结 萝莉富婆 登月]]></description>
+</item>
+<item>
+    <title>咕咕咕</title>
+    <link>https://hugo.lwnlh.com/%E5%92%95%E5%92%95%E5%92%95/</link>
+    <pubDate>Sun, 06 Jan 2019 10:57:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%92%95%E5%92%95%E5%92%95/</guid>
+    <description><![CDATA[[Meting] [Music server=&ldquo;netease&rdquo; id=&ldquo;511027111&rdquo; type=&ldquo;song&rdquo;/] [/Meting] 人类的本质是什么？ 咕咕咕&hellip;.. 平安夜不吃平安果，吃团子吧～ 看过Clannad留言评论举个爪～]]></description>
+</item>
+<item>
+    <title>Start</title>
+    <link>https://hugo.lwnlh.com/start/</link>
+    <pubDate>Wed, 28 Nov 2018 18:22:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/start/</guid>
+    <description><![CDATA[拖延许久，终于下定决心开始写博客。 说是写，倒不如说是向这个世界发出自己的声音，给这个世界留下自己的印记。 就像我们刚降生下来的第一声啼哭，宣告]]></description>
+</item>
+</channel>
+</rss>

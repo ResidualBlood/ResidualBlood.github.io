@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>测试 - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/%E6%B5%8B%E8%AF%95/</link>
+        <description>测试 - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 28 Nov 2018 19:14:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/%E6%B5%8B%E8%AF%95/" rel="self" type="application/rss+xml" /><item>
+    <title>VPS选择，测试，升级</title>
+    <link>https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/</link>
+    <pubDate>Wed, 28 Nov 2018 19:14:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/vps%E9%80%89%E6%8B%A9%E6%B5%8B%E8%AF%95%E5%8D%87%E7%BA%A7/</guid>
+    <description><![CDATA[作者言 扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&hellip;&hellip; #VPS的选择 如何选择VP]]></description>
+</item>
+</channel>
+</rss>

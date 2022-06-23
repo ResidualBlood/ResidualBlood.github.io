@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>网络配置 - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</link>
+        <description>网络配置 - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 13 Sep 2021 15:21:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" rel="self" type="application/rss+xml" /><item>
+    <title>Hetnzer 安装 Proxmox 开小鸡教程 - 安装篇</title>
+    <link>https://hugo.lwnlh.com/hetnzer-%E5%AE%89%E8%A3%85-proxmox-%E5%BC%80%E5%B0%8F%E9%B8%A1%E6%95%99%E7%A8%8B---%E5%AE%89%E8%A3%85%E7%AF%87/</link>
+    <pubDate>Mon, 13 Sep 2021 15:21:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/hetnzer-%E5%AE%89%E8%A3%85-proxmox-%E5%BC%80%E5%B0%8F%E9%B8%A1%E6%95%99%E7%A8%8B---%E5%AE%89%E8%A3%85%E7%AF%87/</guid>
+    <description><![CDATA[此系列主要记录 Hetnzer 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境 本文为此系列第一篇 主要记录 Proxmox 的安装，]]></description>
+</item>
+</channel>
+</rss>

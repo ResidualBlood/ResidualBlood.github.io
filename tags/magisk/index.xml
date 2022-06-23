@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Magisk - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/magisk/</link>
+        <description>Magisk - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 24 Aug 2021 19:55:18 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/magisk/" rel="self" type="application/rss+xml" /><item>
+    <title>小米平板5 Pro ROOT</title>
+    <link>https://hugo.lwnlh.com/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5-pro-root/</link>
+    <pubDate>Tue, 24 Aug 2021 19:55:18 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%B0%8F%E7%B1%B3%E5%B9%B3%E6%9D%BF5-pro-root/</guid>
+    <description><![CDATA[本文主要记录 小米平板5 Root 的各种问题 一句话 Root 替换 boot.img 完事 Magisk SafetyNet 检查 CTS Profile 失败 下载ZIP包，Maagisk刷入，重启解决]]></description>
+</item>
+</channel>
+</rss>

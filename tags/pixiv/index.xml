@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>pixiv - Tag - 我的全新 Hugo 网站</title>
+        <link>https://hugo.lwnlh.com/tags/pixiv/</link>
+        <description>pixiv - Tag - 我的全新 Hugo 网站</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 11 Jan 2019 19:06:00 &#43;0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/pixiv/" rel="self" type="application/rss+xml" /><item>
+    <title>利用Pxder批量下载P站你收藏的插画</title>
+    <link>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8pxder%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDp%E7%AB%99%E4%BD%A0%E6%94%B6%E8%97%8F%E7%9A%84%E6%8F%92%E7%94%BB/</link>
+    <pubDate>Fri, 11 Jan 2019 19:06:00 &#43;0000</pubDate>
+    <author>xxxx</author>
+    <guid>https://hugo.lwnlh.com/%E5%88%A9%E7%94%A8pxder%E6%89%B9%E9%87%8F%E4%B8%8B%E8%BD%BDp%E7%AB%99%E4%BD%A0%E6%94%B6%E8%97%8F%E7%9A%84%E6%8F%92%E7%94%BB/</guid>
+    <description><![CDATA[<blockquote>
+<p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，
+其开源地址为：<a href="https://github.com/Tsuk1ko/pxder" target="_blank" rel="noopener noreffer ">https://github.com/Tsuk1ko/pxder</a>
+本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>
