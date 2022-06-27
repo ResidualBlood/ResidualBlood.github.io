@@ -1,9 +1,7 @@
 # 咕咕咕
 
 
-[Meting]
-[Music server="netease" id="511027111" type="song"/]
-[/Meting]
+
 
 > 人类的本质是什么？ 咕咕咕.....
 

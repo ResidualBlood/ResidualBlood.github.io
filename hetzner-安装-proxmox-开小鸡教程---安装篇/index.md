@@ -1,7 +1,8 @@
 # Hetzner 安装 Proxmox 开小鸡教程 - 安装篇
 
 
-> 此系列主要记录 Hetzner 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境
+> 此系列主要记录 Hetzner 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境  
+
 > 本文为此系列第一篇 主要记录 Proxmox 的安装，以及宿主机的网络配置
 
 ## 一、准备工作
@@ -183,7 +184,7 @@ default via fe80::1 dev vmbr0 metric 1024 onlink pref medium
 
 至此 Proxmox 的安装，以及相关网络配置完成，开小鸡教程将在下一篇文章记录。
 
-> 参考：
-> - 荒岛：[https://lala.im/4821.html](https://lala.im/4821.html)
-> - 老赵部落：[https://blog.faaoo.cn/archives/173](https://blog.faaoo.cn/archives/173)
-> - LiuJason's Blog： [https://www.liujason.com/article/477.html](https://www.liujason.com/article/477.html)
+> 参考：  
+>- 荒岛：[https://lala.im/4821.html](https://lala.im/4821.html)  
+>- 老赵部落：[https://blog.faaoo.cn/archives/173](https://blog.faaoo.cn/archives/173)  
+>- LiuJason's Blog： [https://www.liujason.com/article/477.html](https://www.liujason.com/article/477.html)
