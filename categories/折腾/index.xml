@@ -1,1 +1,195 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>折腾 - Category - 爱世界 N</title><link>https://hugo.lwnlh.com/categories/%E6%8A%98%E8%85%BE/</link><description>折腾 - Category - 爱世界 N</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>pi@lwnlh.com (ResidualBlood)</managingEditor><webMaster>pi@lwnlh.com (ResidualBlood)</webMaster><lastBuildDate>Wed, 17 Nov 2021 11:22:00 +0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/categories/%E6%8A%98%E8%85%BE/" rel="self" type="application/rss+xml"/><item><title>ZeriTier 安装使用、自建 MOON 节点、进阶使用</title><link>https://hugo.lwnlh.com/20_zeritier_installation_and_use_self-built_moon_node_advanced_use/</link><pubDate>Wed, 17 Nov 2021 11:22:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/20_zeritier_installation_and_use_self-built_moon_node_advanced_use/</guid><description>本文主要介绍内网穿透工具ZeroTier使用方法，全文总分为三大部分：第一部分为基本安装使用、第二部分为自建MOON节点，第三部分为进阶使用</description></item><item><title>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇</title><link>https://hugo.lwnlh.com/19_hetzner_install_proxmox_to_open_the_chicken_tutorial_1/</link><pubDate>Mon, 13 Sep 2021 15:21:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/19_hetzner_install_proxmox_to_open_the_chicken_tutorial_1/</guid><description>此系列主要记录 Hetzner 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境 本文为此系列第一篇 主要记录 Proxmox 的安装，</description></item><item><title>小米平板5 Pro ROOT</title><link>https://hugo.lwnlh.com/18_mi_pad_5_pro_root/</link><pubDate>Tue, 24 Aug 2021 19:55:18 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/18_mi_pad_5_pro_root/</guid><description>本文主要记录 小米平板5 Root 的各种问题 一句话 Root 替换 boot.img 完事 Magisk SafetyNet 检查 CTS Profile 失败 下载ZIP包，Maagisk刷入，重启解决</description></item><item><title>Github 进行 fork 后与原仓库同步</title><link>https://hugo.lwnlh.com/16_github_fork_and_sync_with_the_original_repository/</link><pubDate>Wed, 23 Dec 2020 22:05:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/16_github_fork_and_sync_with_the_original_repository/</guid><description>本文主要讲述Github进行fork后如何与原仓库同步，即版本合并；其有两种方法，分别为：本地合并、Github合并 主要参照：https:/</description></item><item><title>Clash 自定义分流规则</title><link>https://hugo.lwnlh.com/15_clash_custom_triage_rules/</link><pubDate>Tue, 22 Dec 2020 22:10:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/15_clash_custom_triage_rules/</guid><description>本文主要讲述如何在ACL4SSR的Clash规则基础上魔改出适合自己的规则配置文件，并方便前文订阅转换的调用 ACL4SSR项目地址：http</description></item><item><title>自建 Clash 订阅转换</title><link>https://hugo.lwnlh.com/14_self-built_clash_subscription_conversion/</link><pubDate>Tue, 22 Dec 2020 20:45:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/14_self-built_clash_subscription_conversion/</guid><description>本文主要说明Clash订阅转换：Docker搭建后端处理subconverter，以及前端Sub-Web，并利用Nginx反代 2020年12</description></item><item><title>利用 SSH 跳板机连接内网服务器</title><link>https://hugo.lwnlh.com/13_use_ssh_springboard_to_connect_the_intranet_server/</link><pubDate>Fri, 11 Sep 2020 19:00:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/13_use_ssh_springboard_to_connect_the_intranet_server/</guid><description>一、前言 由于本地网络环境实在太差，VSCode Remote 连接编译机无限重试，所以就用ssh跳板抢救一下。 所有命令基于open-ssh 二、直接连接 1 ssh</description></item><item><title>在 Linux ( Manjaro ) 上使用 MIDI 键盘</title><link>https://hugo.lwnlh.com/12_using_a_midi_keyboard_on_linux_manjaro/</link><pubDate>Sat, 07 Mar 2020 19:36:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/12_using_a_midi_keyboard_on_linux_manjaro/</guid><description>记录下在Manjaro上使用MIDI键盘的操作。主要参考Arch wiki的USB MIDI keyboards部分。 准备工作 确认你的声卡驱动为ALSA</description></item><item><title>图床测试，喵喵喵</title><link>https://hugo.lwnlh.com/11_picture_test_mm/</link><pubDate>Mon, 24 Jun 2019 02:10:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/11_picture_test_mm/</guid><description></description></item><item><title>添加 Cloudflare CDN 遇到的问题及解决</title><link>https://hugo.lwnlh.com/10_add_cloudflare_cdn_problems_and_solutions/</link><pubDate>Wed, 24 Apr 2019 15:41:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/10_add_cloudflare_cdn_problems_and_solutions/</guid><description>给博客迁移到了搬瓦工传家宝上并使用Cloudflare CDN加速中间的一些坑~ #一 后台管理页面会打不开 如果博客到CDN没有启用https，而</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>折腾 on 爱世界 N</title><link>https://hugo.lwnlh.com/categories/%E6%8A%98%E8%85%BE/</link><description>Recent content in 折腾 on 爱世界 N</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>pi@lwnlh.com (ResidualBlood)</managingEditor><webMaster>pi@lwnlh.com (ResidualBlood)</webMaster><lastBuildDate>Wed, 17 Nov 2021 11:22:00 +0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/categories/%E6%8A%98%E8%85%BE/index.xml" rel="self" type="application/rss+xml"/><item><title>ZeriTier 安装使用、自建 MOON 节点、进阶使用</title><link>https://hugo.lwnlh.com/20_zeritier_installation_and_use_self-built_moon_node_advanced_use/</link><pubDate>Wed, 17 Nov 2021 11:22:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/20_zeritier_installation_and_use_self-built_moon_node_advanced_use/</guid><description>本文主要介绍内网穿透工具ZeroTier使用方法，全文总分为三大部分：第一部分为基本安装使用、第二部分为自建MOON节点，第三部分为进阶使用</description></item><item><title>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇</title><link>https://hugo.lwnlh.com/19_hetzner_install_proxmox_to_open_the_chicken_tutorial_1/</link><pubDate>Mon, 13 Sep 2021 15:21:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/19_hetzner_install_proxmox_to_open_the_chicken_tutorial_1/</guid><description>此系列主要记录 Hetzner 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境 本文为此系列第一篇 主要记录 Proxmox 的安装，</description></item><item><title>小米平板5 Pro ROOT</title><link>https://hugo.lwnlh.com/18_mi_pad_5_pro_root/</link><pubDate>Tue, 24 Aug 2021 19:55:18 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/18_mi_pad_5_pro_root/</guid><description>本文主要记录 小米平板5 Root 的各种问题 一句话 Root 替换 boot.img 完事 Magisk SafetyNet 检查 CTS Profile 失败 下载ZIP包，Maagisk刷入，重启解决</description></item><item><title>Github 进行 fork 后与原仓库同步</title><link>https://hugo.lwnlh.com/16_github_fork_and_sync_with_the_original_repository/</link><pubDate>Wed, 23 Dec 2020 22:05:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/16_github_fork_and_sync_with_the_original_repository/</guid><description>本文主要讲述Github进行fork后如何与原仓库同步，即版本合并；其有两种方法，分别为：本地合并、Github合并 主要参照：https:/</description></item><item><title>Clash 自定义分流规则</title><link>https://hugo.lwnlh.com/15_clash_custom_triage_rules/</link><pubDate>Tue, 22 Dec 2020 22:10:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/15_clash_custom_triage_rules/</guid><description>本文主要讲述如何在ACL4SSR的Clash规则基础上魔改出适合自己的规则配置文件，并方便前文订阅转换的调用 ACL4SSR项目地址：http</description></item><item><title>自建 Clash 订阅转换</title><link>https://hugo.lwnlh.com/14_self-built_clash_subscription_conversion/</link><pubDate>Tue, 22 Dec 2020 20:45:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/14_self-built_clash_subscription_conversion/</guid><description>本文主要说明Clash订阅转换：Docker搭建后端处理subconverter，以及前端Sub-Web，并利用Nginx反代 2020年12</description></item><item><title>利用 SSH 跳板机连接内网服务器</title><link>https://hugo.lwnlh.com/13_use_ssh_springboard_to_connect_the_intranet_server/</link><pubDate>Fri, 11 Sep 2020 19:00:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/13_use_ssh_springboard_to_connect_the_intranet_server/</guid><description>一、前言 由于本地网络环境实在太差，VSCode Remote 连接编译机无限重试，所以就用ssh跳板抢救一下。 所有命令基于open-ssh 二、直接连接 1 ssh</description></item><item><title>在 Linux ( Manjaro ) 上使用 MIDI 键盘</title><link>https://hugo.lwnlh.com/12_using_a_midi_keyboard_on_linux_manjaro/</link><pubDate>Sat, 07 Mar 2020 19:36:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/12_using_a_midi_keyboard_on_linux_manjaro/</guid><description>记录下在Manjaro上使用MIDI键盘的操作。主要参考Arch wiki的USB MIDI keyboards部分。 准备工作 确认你的声卡驱动为ALSA</description></item><item><title>图床测试，喵喵喵</title><link>https://hugo.lwnlh.com/11_picture_test_mm/</link><pubDate>Mon, 24 Jun 2019 02:10:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/11_picture_test_mm/</guid><description/></item><item><title>添加 Cloudflare CDN 遇到的问题及解决</title><link>https://hugo.lwnlh.com/10_add_cloudflare_cdn_problems_and_solutions/</link><pubDate>Wed, 24 Apr 2019 15:41:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/10_add_cloudflare_cdn_problems_and_solutions/</guid><description>给博客迁移到了搬瓦工传家宝上并使用Cloudflare CDN加速中间的一些坑~ #一 后台管理页面会打不开 如果博客到CDN没有启用https，而</description></item><item><title>利用 Pxder 批量下载 Pixiv 你收藏的插画</title><link>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</link><pubDate>Fri, 11 Jan 2019 19:06:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</guid><description>&lt;blockquote>
+&lt;p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：&lt;a href="https://github.com/Tsuk1ko/pxder">https://github.com/Tsuk1ko/pxder&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址&lt;/p>
+&lt;/blockquote></description></item><item><title>利用 YouTube-dl 优雅地下载 YouTube 视频</title><link>https://hugo.lwnlh.com/8_elegantly_download_youtube_videos_with_youtube-dl/</link><pubDate>Tue, 08 Jan 2019 17:43:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/8_elegantly_download_youtube_videos_with_youtube-dl/</guid><description>下载的视频仅作为交流学习收藏哦，不要作为商用！ “YouTube-dl”是一个不仅可以下载YouTube视频，还可以下载哔哩哔哩等视频的命令行</description></item><item><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(下)</title><link>https://hugo.lwnlh.com/6_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_3/</link><pubDate>Sat, 08 Dec 2018 13:37:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/6_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_3/</guid><description>&lt;blockquote>
+&lt;p>本片讲述挂载Google Drive扩展你的VPS硬盘并把Aria2下载后的文件自动上传到Google Drive中等玩法。&lt;/p>
+&lt;/blockquote></description></item><item><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中)</title><link>https://hugo.lwnlh.com/6_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_2/</link><pubDate>Sat, 08 Dec 2018 11:49:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/6_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_2/</guid><description>&lt;blockquote>
+&lt;p>本文主要讲述Directory Lister、Aria2、Nextcloud的配置问题&lt;/p>
+&lt;/blockquote></description></item><item><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)</title><link>https://hugo.lwnlh.com/5_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_1/</link><pubDate>Sat, 01 Dec 2018 19:27:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/5_fake_nas_use_vps_to_realize_backup_download_and_streaming_playback_1/</guid><description>&lt;blockquote>
+&lt;p>本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&amp;hellip;&amp;hellip;&lt;/p>
+&lt;/blockquote>
+&lt;p>#新建虚拟主机
+首先我们需要新建三个虚拟主机、假设三个虚拟主机网址分别为&lt;code>cloud.test.com&lt;/code>、&lt;code>dd.test.com&lt;/code>、&lt;code>ar.test.com&lt;/code>,
+在&lt;code>lnmp&lt;/code>目录下运行：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./vhost.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接着根据提示创建即可
+#安装DirectoryLister
+LNMP创建的网站根目录为&lt;code>/data/wwwroot/dd.test.com&lt;/code>
+##官网下载安装
+&lt;a href="https://www.directorylister.com/">DirectoryLister官网&lt;/a>
+##使用魔改版DirectoryLister
+这里的魔改版DirectoryLister由&lt;a href="https://github.com/ToyoDAdoubi/DirectoryLister">逗比&lt;/a>大佬提供
+网站根目录运行：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/ToyoDAdoubi/DirectoryLister.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>##文件结构&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├─ resources
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├ themes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └ bootstrap
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │ └ .....
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ │
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├ DirectoryLister.php
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├ config.php
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └ fileTypes.php
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├ README.html # 文件夹内的 说明简介文件 #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├ index.php
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├─ 测试文件夹
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├ 测试文件.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └ README.html # 文件夹内的 说明简介文件 #
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└ 测试文件.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 绝对路径分别为：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com/resources/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com/README.html
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com/index.php
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com/测试文件夹/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/data/wwwroot/dd.test.com/测试文件.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>一些注意事项见中篇
+#安装Aria2及AriaNG
+##安装依赖包
+首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install wget screen unzip gcc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev zlib1g-dev libsqlite3-dev pkg-config
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://ws1.sinaimg.cn/large/006uw7syly1fxrhlf6lebj30nj05cdfy.jpg" alt="">
+##安装Aria2
+###方式一、手动编译安装
+运行以下命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt install auto-apt checkinstall
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> /root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tar xzvf aria2-1.33.1.tar.gz
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> aria2-1.33.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">auto-apt run ./configure
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">make
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">checkinstall
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这样会生成一个deb包，卸载和重新安装就非常方便了
+###方式二、一键脚本安装（建议）
+还是推荐一键脚本安装，比手动编译会少很多问题&amp;hellip;..
+使用逗比大佬的一键脚本：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> chmod +x aria2.sh &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> bash aria2.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 如果上面这个脚本无法下载，尝试使用备用下载：&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> chmod +x aria2.sh &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> bash aria2.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>根据脚本提示安装即可&lt;/p>
+&lt;blockquote>
+&lt;p>其中，&lt;code>aria2.conf&lt;/code>配置文件需要做一些修改，我会另开一篇文章详细说明
+#安装AriaNG
+到网站根目录，这里是&lt;code>ar.test.com&lt;/code>运行&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>之后解压，然后访问你的域名填写Aria2的密钥即可
+#安装Nextcloud
+##添加MySQL
+在安装Nextcloud之前，我们需要在MySQL中添加一下账户及数据库
+访问你的IP，会出现OneinStack的界面&lt;img src="https://ws1.sinaimg.cn/large/006uw7syly1fxri4shvu9j30zc0j2wgq.jpg" alt="">
+点击&lt;code>phpMyAdmin&lt;/code>，登陆后，点击账户，新增用户账户，然后按照如图所示操作
+&lt;img src="https://ws1.sinaimg.cn/large/006uw7syly1fxria4fofyj30s90gmwg8.jpg" alt="">
+最后点击最下面的&lt;code>执行&lt;/code>
+这样，MySQL部分完毕
+##安装Nextcloud
+首先进入到网站根目录&lt;code>cloud.test.com&lt;/code>
+然后下载Nextcloud&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>下载完后解压，输入域名进行接下来的安装即可
+至此，Nextcloud安装完毕&lt;/p>
+&lt;blockquote>
+&lt;p>安装错误等问题见中篇&amp;hellip;&amp;hellip;&lt;/p>
+&lt;/blockquote></description></item><item><title>利用 OneinStack 搭建 LNMP 网站环境</title><link>https://hugo.lwnlh.com/4_use_oneinstack_to_build_website_environment/</link><pubDate>Sat, 01 Dec 2018 12:01:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/4_use_oneinstack_to_build_website_environment/</guid><description>作者言：没啥营养，不看也罢&amp;hellip;&amp;hellip; #一、安装 这里提供两种方式安装 ##图形化安装 这里我们使用 官网 的一键脚本安装。在下图</description></item><item><title>VPS 的加固及优化</title><link>https://hugo.lwnlh.com/3_reinforcement_and_optimization_of_vps/</link><pubDate>Wed, 28 Nov 2018 19:57:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/3_reinforcement_and_optimization_of_vps/</guid><description>#VPS加固 ##一、SSH防爆破 顾名思义，防止SSH密码被爆破以及减小VPS压力。 这里我们使用fail2ban，各位应该都听说过这个程序，可</description></item><item><title>VPS 选择，测试，升级</title><link>https://hugo.lwnlh.com/2_vps_selectiontesting_upgrading/</link><pubDate>Wed, 28 Nov 2018 19:14:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/2_vps_selectiontesting_upgrading/</guid><description>作者言 扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&amp;hellip;&amp;hellip; #VPS的选择 如何选择VP</description></item></channel></rss>
