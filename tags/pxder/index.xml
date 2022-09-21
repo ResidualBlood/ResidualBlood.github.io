@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pxder on 爱世界 N</title><link>https://hugo.lwnlh.com/tags/pxder/</link><description>Recent content in Pxder on 爱世界 N</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>pi@lwnlh.com (ResidualBlood)</managingEditor><webMaster>pi@lwnlh.com (ResidualBlood)</webMaster><lastBuildDate>Fri, 11 Jan 2019 19:06:00 +0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/pxder/index.xml" rel="self" type="application/rss+xml"/><item><title>利用 Pxder 批量下载 Pixiv 你收藏的插画</title><link>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</link><pubDate>Fri, 11 Jan 2019 19:06:00 +0000</pubDate><author>pi@lwnlh.com (ResidualBlood)</author><guid>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</guid><description>&lt;blockquote>
-&lt;p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：&lt;a href="https://github.com/Tsuk1ko/pxder">https://github.com/Tsuk1ko/pxder&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
-&lt;p>本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Pxder - Tag - 爱世界 N</title><link>https://hugo.lwnlh.com/tags/pxder/</link><description>Pxder - Tag - 爱世界 N</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>pi@lwnlh.com (ResidualBlood)</managingEditor><webMaster>pi@lwnlh.com (ResidualBlood)</webMaster><lastBuildDate>Fri, 11 Jan 2019 19:06:00 +0000</lastBuildDate><atom:link href="https://hugo.lwnlh.com/tags/pxder/" rel="self" type="application/rss+xml"/><item><title>利用 Pxder 批量下载 Pixiv 你收藏的插画</title><link>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</link><pubDate>Fri, 11 Jan 2019 19:06:00 +0000</pubDate><author>ResidualBlood</author><guid>https://hugo.lwnlh.com/9_use_pxder_to_download_your_illustrations_from_pixiv/</guid><description><![CDATA[<blockquote>
+<p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：<a href="https://github.com/Tsuk1ko/pxder" target="_blank" rel="noopener noreffer ">https://github.com/Tsuk1ko/pxder</a></p>
+</blockquote>
+<blockquote>
+<p>本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址</p>
+</blockquote>]]></description></item></channel></rss>
