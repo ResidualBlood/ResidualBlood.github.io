@@ -7,6 +7,17 @@
 2. PLEX 通过 反代机 Nginx 反代, 且 远程访问 已关闭
 3. 宿主机能够 SSH 访问 反代机
 
+## 修改 SSH Config
+反代机 SSH 需要打开 `AllowTcpForwarding yes`
+```
+nano /etc/ssh/sshd_config
+```
+将 `AllowTcpForwarding yes` 前面的 # 删掉 
+重启 SSH 服务
+```
+sudo systemctl restart sshd
+```
+
 ## 修改配置文件
 修改 `docker-compose` 文件, 网络 更改为 `host`, 添加 `environment`, 如下
 ```
@@ -25,6 +36,7 @@ environment:
  ```
  docker-compose up -d
  ```
+
 ## 检查是否成功
  打开 PLEX 检查, 此时媒体库应该能正常访问, 没有的话 打开侧边栏-更多
  或者 进入到容器内 `curl ipv4.ip.sb` 看看出口IP是不是你的反代机
