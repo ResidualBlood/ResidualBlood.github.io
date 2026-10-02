@@ -1,126 +1,49 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content=" Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：https://github.com/Tsuk1ko/pxder\n本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址\n"><title>利用 Pxder 批量下载 Pixiv 你收藏的插画</title><link rel=canonical href=https://hugo.lwnlh.com/posts/9/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.6c875234350e518395efbf51958523b0852fb2215ab8cb81358f9317153eba2d.css><meta property='og:title' content="利用 Pxder 批量下载 Pixiv 你收藏的插画"><meta property='og:description' content=" Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：https://github.com/Tsuk1ko/pxder\n本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址\n"><meta property='og:url' content='https://hugo.lwnlh.com/posts/9/'><meta property='og:site_name' content='爱世界 N'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='P站'><meta property='article:tag' content='pixiv'><meta property='article:tag' content='Pxder'><meta property='article:published_time' content='2019-01-11T19:06:00+00:00'><meta property='article:modified_time' content='2019-01-11T19:06:00+00:00'><meta name=twitter:title content="利用 Pxder 批量下载 Pixiv 你收藏的插画"><meta name=twitter:description content=" Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：https://github.com/Tsuk1ko/pxder\n本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址\n"><link rel="shortcut icon" href=/img/avatar.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar.png width=128 height=128 class=site-logo loading=lazy alt=Avatar>
-</a><span class=emoji>🌙</span></figure><div class=site-meta><h1 class=site-name><a href=/>爱世界 N</a></h1><h2 class=site-description>折腾不息，记录不止</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>首页</span></a></li><li><a href=/guidang/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>归档</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>关于我</span></a></li><li><a href=/youlian/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
-<span>友链</span></a></li><li><a href=/liuyan/><svg class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M21 14l-3-3h-7a1 1 0 01-1-1V4a1 1 0 011-1h9a1 1 0 011 1v10"/><path d="M14 15v2a1 1 0 01-1 1H6l-3 3V11a1 1 0 011-1h2"/></svg>
-<span>留言板</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span></span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E5%B9%B2%E8%B4%A7/ style=background-color:#beefe5;color:#0f3d34>干货
-</a><a href=/categories/%E6%8A%98%E8%85%BE/ style=background-color:#efeabe;color:#3d390f>折腾
-</a><a href=/categories/%E5%88%86%E4%BA%AB/ style=background-color:#e6beef;color:#350f3d>分享</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/9/>利用 Pxder 批量下载 Pixiv 你收藏的插画</a></h2></div><footer class=article-meta><div class=inline-meta><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2019-01-11T19:06:00Z>Friday, January 11, 2019</time>
-<svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading></time></div></footer></div></header><section class=article-content><blockquote><p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：<a class=link href=https://github.com/Tsuk1ko/pxder target=_blank rel=noopener>https://github.com/Tsuk1ko/pxder</a></p></blockquote><blockquote><p>本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址</p></blockquote><p>##安装Node.js环境</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -sL https://deb.nodesource.com/setup_10.x <span class=p>|</span> sudo -E bash -
-</span></span><span class=line><span class=cl>sudo apt-get install -y nodejs
-</span></span></code></pre></td></tr></table></div></div><p>接着安装Pxder</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>npm i -g pxder
-</span></span></code></pre></td></tr></table></div></div><p>卸载的话运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>npm uninstall -g pxder
-</span></span></code></pre></td></tr></table></div></div><p>##配置
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>利用 Pxder 批量下载 Pixiv 你收藏的插画 - 爱世界 N</title><link rel=icon href=/assets/img/avatar.png><style>:root{--bg:#0d1117;--card-bg:#161b22;--text:#c9d1d9;--heading:#f0f6fc;--accent:#58a6ff;--border:#30363d;--meta:#8b949e;--code-bg:#1f242c}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.7}header{padding:2.5rem 1rem 1.5rem;text-align:center;border-bottom:1px solid var(--border);background:rgba(13,17,23,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:100}.site-title{margin:0 0 .5rem;font-size:1.8rem}.site-title a{color:var(--heading);text-decoration:none;font-weight:700}nav a{margin:0 .75rem;color:var(--accent);text-decoration:none;font-size:.95rem;transition:color .2s}nav a:hover{color:#79c0ff;text-decoration:underline}main{max-width:820px;margin:2.5rem auto;padding:0 1.25rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.75rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,.15)}article h1,article h2{margin-top:0;color:var(--heading)}article h2 a{color:var(--heading);text-decoration:none;transition:color .2s}article h2 a:hover{color:var(--accent)}.meta{color:var(--meta);font-size:.875rem;margin-bottom:1.2rem}.content img{max-width:100%;height:auto;border-radius:6px;display:block;margin:1.5rem auto}.content pre{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:1rem;overflow-x:auto}.content code{font-family:ui-monospace,SFMono-Regular,sf mono,Menlo,Consolas,monospace;font-size:.9em}.content p code{background:var(--code-bg);padding:.2em .4em;border-radius:4px;border:1px solid var(--border)}.content a{color:var(--accent);text-decoration:none}.content a:hover{text-decoration:underline}footer{text-align:center;padding:2.5rem 1rem;color:var(--meta);border-top:1px solid var(--border);font-size:.9rem}.author-box{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2rem}.author-avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><div class=site-title><a href=/>爱世界 N</a></div><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>利用 Pxder 批量下载 Pixiv 你收藏的插画</h1><div class=meta>发布时间：2019-01-11 19:06</div><div class=content><blockquote><p>Pxder是一款利用Node.js编写的能够批量下载你在P站收藏，或者喜欢的画师插画的下载器，其开源地址为：<a href=https://github.com/Tsuk1ko/pxder>https://github.com/Tsuk1ko/pxder</a></p></blockquote><blockquote><p>本篇主要讲解在Ubuntu16.04下使用，Windows下可参考上面的地址</p></blockquote><p>##安装Node.js环境</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+</span></span><span style=display:flex><span>sudo apt-get install -y nodejs
+</span></span></code></pre></div><p>接着安装Pxder</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npm i -g pxder
+</span></span></code></pre></div><p>卸载的话运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npm uninstall -g pxder
+</span></span></code></pre></div><p>##配置
 首先我们需要配置一下账户及下载设置
-###登录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder --login
-</span></span></code></pre></td></tr></table></div></div><p>接着输入你的账户密码
-###登出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder --logout
-</span></span></code></pre></td></tr></table></div></div><p>###下载设置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder --setting
-</span></span></code></pre></td></tr></table></div></div><p>然后你会看到以下输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>Pxder</span> <span class=n>Options</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=n>Download</span> <span class=n>path</span>	<span class=o>/</span><span class=n>pixiv</span>        <span class=c1># 下载目录，必须设置</span>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=n>Download</span> <span class=n>thread</span>	<span class=mi>5</span>             <span class=c1># 下载线程数</span>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>3</span><span class=p>]</span> <span class=n>Download</span> <span class=n>timeout</span>	<span class=mi>30</span>            <span class=c1># 下载超时</span>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>4</span><span class=p>]</span> <span class=n>Auto</span> <span class=n>rename</span>		<span class=n>off</span>           <span class=c1># 自动重命名（文件夹）</span>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>5</span><span class=p>]</span> <span class=n>Proxy</span>		<span class=n>Disable</span>       <span class=c1># 使用代理</span>
-</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=n>Exit</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>Press</span> <span class=n>a</span> <span class=n>key</span> <span class=p>[</span><span class=mf>1.</span><span class=o>..</span><span class=mi>5</span> <span class=o>/</span> <span class=mi>0</span><span class=p>]:</span> <span class=mi>0</span>
-</span></span></code></pre></td></tr></table></div></div><p>输入相关序号进行设置就好，最后输入0退出
+###登录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder --login
+</span></span></code></pre></div><p>接着输入你的账户密码
+###登出</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder --logout
+</span></span></code></pre></div><p>###下载设置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder --setting
+</span></span></code></pre></div><p>然后你会看到以下输出</p><pre tabindex=0><code>Pxder Options
+
+[1] Download path	/pixiv        # 下载目录，必须设置
+[2] Download thread	5             # 下载线程数
+[3] Download timeout	30            # 下载超时
+[4] Auto rename		off           # 自动重命名（文件夹）
+[5] Proxy		Disable       # 使用代理
+[0] Exit
+
+Press a key [1...5 / 0]: 0
+</code></pre><p>输入相关序号进行设置就好，最后输入0退出
 ##使用
-###下载公开收藏</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -b
-</span></span><span class=line><span class=cl><span class=c1># 或</span>
-</span></span><span class=line><span class=cl>pxder --bookmark
-</span></span></code></pre></td></tr></table></div></div><p>插画会被保存在<code>[bookmark] Public</code>文件夹中</p><p>###下载私密收藏</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -B
-</span></span><span class=line><span class=cl><span class=c1># 或</span>
-</span></span><span class=line><span class=cl>pxder --bookmark--private
-</span></span></code></pre></td></tr></table></div></div><p>插画会被保存在<code>[bookmark] Private</code>文件夹中</p><p>###下载公开关注的画师的所有作品</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -f
-</span></span><span class=line><span class=cl><span class=c1># 或</span>
-</span></span><span class=line><span class=cl>pxder --follow
-</span></span></code></pre></td></tr></table></div></div><p>###下载私密关注的画师的所有作品</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -F
-</span></span><span class=line><span class=cl><span class=c1># 或</span>
-</span></span><span class=line><span class=cl>pxder --follow--private
-</span></span></code></pre></td></tr></table></div></div><p>###下载或更新某画师的所有插画作品
-使用<code>-u</code>或<code>--uid</code>参数，后跟画师的 <code>UID</code>，可单个可多个，如果多个则用英文半角逗号隔开</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -u uid1,uid2,uid3,...
-</span></span><span class=line><span class=cl>例：
-</span></span><span class=line><span class=cl>pxder -u 5899479,724607,11597411
-</span></span></code></pre></td></tr></table></div></div><p>###更新已下载的画师的画作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -U
-</span></span><span class=line><span class=cl><span class=c1># 或</span>
-</span></span><span class=line><span class=cl>pxder --update
-</span></span></code></pre></td></tr></table></div></div><p>###下载指定 PID 插画</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pxder -p pid1,pid2,pid3,...
-</span></span><span class=line><span class=cl>例：
-</span></span><span class=line><span class=cl>pxder -p 70593670,70594912,70595516
-</span></span></code></pre></td></tr></table></div></div><p>插画会被保存在<code>PID</code>文件夹中</p><p>有问题欢迎评论留言～</p></section><footer class="article-meta article-footer"><section class=article-tags><a href=/tags/p%E7%AB%99/>P站</a>
-<a href=/tags/pixiv/>Pixiv</a>
-<a href=/tags/pxder/>Pxder</a></section><section class="article-copyright inline-meta"><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under <a class=link href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank rel=noopener>CC BY-NC 4.0</a></span></section></footer></article><aside><h2 class=section-title></h2><div class=subsection-list><div class=article-list--tile><article><a href=/posts/8/><div class=article-details><h2 class=article-title>利用 YouTube-dl 优雅地下载 YouTube 视频</h2></div></a></article><article><a href=/posts/3/><div class=article-details><h2 class=article-title>利用 OneinStack 搭建 LNMP 网站环境</h2></div></a></article><article><a href=/posts/20/><div class=article-details><h2 class=article-title>ZeriTier 安装使用、自建 MOON 节点、进阶使用</h2></div></a></article><article><a href=/posts/19/><div class=article-details><h2 class=article-title>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇</h2></div></a></article><article><a href=/posts/18/><div class=article-details><h2 class=article-title>小米平板5 Pro ROOT</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=zh-CN data-loading=lazy crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
-2018 -
-2026 爱世界 N</section><section class=powerby><br></section><link rel=stylesheet href=/plugins/pio/pio.css><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></footer><script type=module>
-    import gallery from '\/ts\/gallery.js';
-
-    const articleContent = document.querySelector('.article-content');
-    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
-    
-    if (shouldLoad) {
-        gallery(articleContent);
-
-        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
-        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
-
-        const styleTag = document.createElement('link');
-        styleTag.rel = 'stylesheet';
-        styleTag.href = styleHref;
-        document.head.appendChild(styleTag);
-
-        const lightbox = new PhotoSwipeLightbox({
-            gallerySelector: '.article-content',
-            childSelector: 'figure a.image-link',
-            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
-        });
-        lightbox.init();
-    }
-</script></main></div><script type=text/javascript src=/ts/main.d00997a2f4a6ce525f496da0c3ae6ad392b0468b8a9024f23309fdfc75c67a35.js defer></script></body></html>
+###下载公开收藏</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -b
+</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
+</span></span><span style=display:flex><span>pxder --bookmark
+</span></span></code></pre></div><p>插画会被保存在<code>[bookmark] Public</code>文件夹中</p><p>###下载私密收藏</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -B
+</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
+</span></span><span style=display:flex><span>pxder --bookmark--private
+</span></span></code></pre></div><p>插画会被保存在<code>[bookmark] Private</code>文件夹中</p><p>###下载公开关注的画师的所有作品</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -f
+</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
+</span></span><span style=display:flex><span>pxder --follow
+</span></span></code></pre></div><p>###下载私密关注的画师的所有作品</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -F
+</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
+</span></span><span style=display:flex><span>pxder --follow--private
+</span></span></code></pre></div><p>###下载或更新某画师的所有插画作品
+使用<code>-u</code>或<code>--uid</code>参数，后跟画师的 <code>UID</code>，可单个可多个，如果多个则用英文半角逗号隔开</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -u uid1,uid2,uid3,...
+</span></span><span style=display:flex><span>例：
+</span></span><span style=display:flex><span>pxder -u 5899479,724607,11597411
+</span></span></code></pre></div><p>###更新已下载的画师的画作</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -U
+</span></span><span style=display:flex><span><span style=color:#75715e># 或</span>
+</span></span><span style=display:flex><span>pxder --update
+</span></span></code></pre></div><p>###下载指定 PID 插画</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>pxder -p pid1,pid2,pid3,...
+</span></span><span style=display:flex><span>例：
+</span></span><span style=display:flex><span>pxder -p 70593670,70594912,70595516
+</span></span></code></pre></div><p>插画会被保存在<code>PID</code>文件夹中</p><p>有问题欢迎评论留言～</p></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2018 - 2026 ResidualBlood. 保留所有权利。</p><p>Powered by Hugo (Official Latest) & Cloudflare Pages.</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

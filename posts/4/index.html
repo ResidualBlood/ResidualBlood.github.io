@@ -1,163 +1,80 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content=" 本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&mldr;&mldr;\n#新建虚拟主机 首先我们需要新建三个虚拟主机、假设三个虚拟主机网址分别为cloud.test.com、dd.test.com、ar.test.com, 在lnmp目录下运行：\n1 ./vhost.sh 接着根据提示创建即可 #安装DirectoryLister LNMP创建的网站根目录为/data/wwwroot/dd.test.com ##官网下载安装 DirectoryLister官网 ##使用魔改版DirectoryLister 这里的魔改版DirectoryLister由逗比大佬提供 网站根目录运行：\n1 git clone https://github.com/ToyoDAdoubi/DirectoryLister.git ##文件结构\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 /data/wwwroot/dd.test.com ├─ resources │ ├ themes │ │ └ bootstrap │ │ └ ..... │ │ │ ├ DirectoryLister.php │ ├ config.php │ └ fileTypes.php │ ├ README.html # 文件夹内的 说明简介文件 # ├ index.php │ ├─ 测试文件夹 │ ├ 测试文件.txt │ └ README.html # 文件夹内的 说明简介文件 # │ └ 测试文件.txt 绝对路径分别为： /data/wwwroot/dd.test.com/resources/ /data/wwwroot/dd.test.com/README.html /data/wwwroot/dd.test.com/index.php /data/wwwroot/dd.test.com/测试文件夹/ /data/wwwroot/dd.test.com/测试文件.txt 一些注意事项见中篇 #安装Aria2及AriaNG ##安装依赖包 首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型\n1 2 sudo apt install wget screen unzip gcc sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev zlib1g-dev libsqlite3-dev pkg-config ##安装Aria2 ###方式一、手动编译安装 运行以下命令：\n1 2 3 4 5 6 7 8 sudo apt install auto-apt checkinstall cd /root wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz tar xzvf aria2-1.33.1.tar.gz cd aria2-1.33.1 auto-apt run ./configure make checkinstall 这样会生成一个deb包，卸载和重新安装就非常方便了 ###方式二、一键脚本安装（建议） 还是推荐一键脚本安装，比手动编译会少很多问题&mldr;.. 使用逗比大佬的一键脚本：\n1 2 3 4 wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh && chmod +x aria2.sh && bash aria2.sh # 如果上面这个脚本无法下载，尝试使用备用下载： wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh && chmod +x aria2.sh && bash aria2.sh 根据脚本提示安装即可\n其中，aria2.conf配置文件需要做一些修改，我会另开一篇文章详细说明 #安装AriaNG 到网站根目录，这里是ar.test.com运行\n1 wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip 之后解压，然后访问你的域名填写Aria2的密钥即可 #安装Nextcloud ##添加MySQL 在安装Nextcloud之前，我们需要在MySQL中添加一下账户及数据库 访问你的IP，会出现OneinStack的界面 点击phpMyAdmin，登陆后，点击账户，新增用户账户，然后按照如图所示操作 最后点击最下面的执行 这样，MySQL部分完毕 ##安装Nextcloud 首先进入到网站根目录cloud.test.com 然后下载Nextcloud\n1 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip 下载完后解压，输入域名进行接下来的安装即可 至此，Nextcloud安装完毕\n安装错误等问题见中篇&mldr;&mldr;\n"><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)</title><link rel=canonical href=https://hugo.lwnlh.com/posts/4/><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=preload as=style href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"><link rel=stylesheet href=/scss/style.min.6c875234350e518395efbf51958523b0852fb2215ab8cb81358f9317153eba2d.css><meta property='og:title' content="伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)"><meta property='og:description' content=" 本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&mldr;&mldr;\n#新建虚拟主机 首先我们需要新建三个虚拟主机、假设三个虚拟主机网址分别为cloud.test.com、dd.test.com、ar.test.com, 在lnmp目录下运行：\n1 ./vhost.sh 接着根据提示创建即可 #安装DirectoryLister LNMP创建的网站根目录为/data/wwwroot/dd.test.com ##官网下载安装 DirectoryLister官网 ##使用魔改版DirectoryLister 这里的魔改版DirectoryLister由逗比大佬提供 网站根目录运行：\n1 git clone https://github.com/ToyoDAdoubi/DirectoryLister.git ##文件结构\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 /data/wwwroot/dd.test.com ├─ resources │ ├ themes │ │ └ bootstrap │ │ └ ..... │ │ │ ├ DirectoryLister.php │ ├ config.php │ └ fileTypes.php │ ├ README.html # 文件夹内的 说明简介文件 # ├ index.php │ ├─ 测试文件夹 │ ├ 测试文件.txt │ └ README.html # 文件夹内的 说明简介文件 # │ └ 测试文件.txt 绝对路径分别为： /data/wwwroot/dd.test.com/resources/ /data/wwwroot/dd.test.com/README.html /data/wwwroot/dd.test.com/index.php /data/wwwroot/dd.test.com/测试文件夹/ /data/wwwroot/dd.test.com/测试文件.txt 一些注意事项见中篇 #安装Aria2及AriaNG ##安装依赖包 首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型\n1 2 sudo apt install wget screen unzip gcc sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev zlib1g-dev libsqlite3-dev pkg-config ##安装Aria2 ###方式一、手动编译安装 运行以下命令：\n1 2 3 4 5 6 7 8 sudo apt install auto-apt checkinstall cd /root wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz tar xzvf aria2-1.33.1.tar.gz cd aria2-1.33.1 auto-apt run ./configure make checkinstall 这样会生成一个deb包，卸载和重新安装就非常方便了 ###方式二、一键脚本安装（建议） 还是推荐一键脚本安装，比手动编译会少很多问题&mldr;.. 使用逗比大佬的一键脚本：\n1 2 3 4 wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh && chmod +x aria2.sh && bash aria2.sh # 如果上面这个脚本无法下载，尝试使用备用下载： wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh && chmod +x aria2.sh && bash aria2.sh 根据脚本提示安装即可\n其中，aria2.conf配置文件需要做一些修改，我会另开一篇文章详细说明 #安装AriaNG 到网站根目录，这里是ar.test.com运行\n1 wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip 之后解压，然后访问你的域名填写Aria2的密钥即可 #安装Nextcloud ##添加MySQL 在安装Nextcloud之前，我们需要在MySQL中添加一下账户及数据库 访问你的IP，会出现OneinStack的界面 点击phpMyAdmin，登陆后，点击账户，新增用户账户，然后按照如图所示操作 最后点击最下面的执行 这样，MySQL部分完毕 ##安装Nextcloud 首先进入到网站根目录cloud.test.com 然后下载Nextcloud\n1 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip 下载完后解压，输入域名进行接下来的安装即可 至此，Nextcloud安装完毕\n安装错误等问题见中篇&mldr;&mldr;\n"><meta property='og:url' content='https://hugo.lwnlh.com/posts/4/'><meta property='og:site_name' content='爱世界 N'><meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:tag' content='NAS'><meta property='article:tag' content='Nextcloud'><meta property='article:tag' content='DirectoryLister'><meta property='article:tag' content='Aria2'><meta property='article:tag' content='AriaNg'><meta property='article:published_time' content='2018-12-01T19:27:00+00:00'><meta property='article:modified_time' content='2018-12-01T19:27:00+00:00'><meta name=twitter:title content="伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)"><meta name=twitter:description content=" 本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&mldr;&mldr;\n#新建虚拟主机 首先我们需要新建三个虚拟主机、假设三个虚拟主机网址分别为cloud.test.com、dd.test.com、ar.test.com, 在lnmp目录下运行：\n1 ./vhost.sh 接着根据提示创建即可 #安装DirectoryLister LNMP创建的网站根目录为/data/wwwroot/dd.test.com ##官网下载安装 DirectoryLister官网 ##使用魔改版DirectoryLister 这里的魔改版DirectoryLister由逗比大佬提供 网站根目录运行：\n1 git clone https://github.com/ToyoDAdoubi/DirectoryLister.git ##文件结构\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 /data/wwwroot/dd.test.com ├─ resources │ ├ themes │ │ └ bootstrap │ │ └ ..... │ │ │ ├ DirectoryLister.php │ ├ config.php │ └ fileTypes.php │ ├ README.html # 文件夹内的 说明简介文件 # ├ index.php │ ├─ 测试文件夹 │ ├ 测试文件.txt │ └ README.html # 文件夹内的 说明简介文件 # │ └ 测试文件.txt 绝对路径分别为： /data/wwwroot/dd.test.com/resources/ /data/wwwroot/dd.test.com/README.html /data/wwwroot/dd.test.com/index.php /data/wwwroot/dd.test.com/测试文件夹/ /data/wwwroot/dd.test.com/测试文件.txt 一些注意事项见中篇 #安装Aria2及AriaNG ##安装依赖包 首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型\n1 2 sudo apt install wget screen unzip gcc sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev zlib1g-dev libsqlite3-dev pkg-config ##安装Aria2 ###方式一、手动编译安装 运行以下命令：\n1 2 3 4 5 6 7 8 sudo apt install auto-apt checkinstall cd /root wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz tar xzvf aria2-1.33.1.tar.gz cd aria2-1.33.1 auto-apt run ./configure make checkinstall 这样会生成一个deb包，卸载和重新安装就非常方便了 ###方式二、一键脚本安装（建议） 还是推荐一键脚本安装，比手动编译会少很多问题&mldr;.. 使用逗比大佬的一键脚本：\n1 2 3 4 wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh && chmod +x aria2.sh && bash aria2.sh # 如果上面这个脚本无法下载，尝试使用备用下载： wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh && chmod +x aria2.sh && bash aria2.sh 根据脚本提示安装即可\n其中，aria2.conf配置文件需要做一些修改，我会另开一篇文章详细说明 #安装AriaNG 到网站根目录，这里是ar.test.com运行\n1 wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip 之后解压，然后访问你的域名填写Aria2的密钥即可 #安装Nextcloud ##添加MySQL 在安装Nextcloud之前，我们需要在MySQL中添加一下账户及数据库 访问你的IP，会出现OneinStack的界面 点击phpMyAdmin，登陆后，点击账户，新增用户账户，然后按照如图所示操作 最后点击最下面的执行 这样，MySQL部分完毕 ##安装Nextcloud 首先进入到网站根目录cloud.test.com 然后下载Nextcloud\n1 wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip 下载完后解压，输入域名进行接下来的安装即可 至此，Nextcloud安装完毕\n安装错误等问题见中篇&mldr;&mldr;\n"><link rel="shortcut icon" href=/img/avatar.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar.png width=128 height=128 class=site-logo loading=lazy alt=Avatar>
-</a><span class=emoji>🌙</span></figure><div class=site-meta><h1 class=site-name><a href=/>爱世界 N</a></h1><h2 class=site-description>折腾不息，记录不止</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>首页</span></a></li><li><a href=/guidang/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>归档</span></a></li><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>关于我</span></a></li><li><a href=/youlian/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
-<span>友链</span></a></li><li><a href=/liuyan/><svg class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M21 14l-3-3h-7a1 1 0 01-1-1V4a1 1 0 011-1h9a1 1 0 011 1v10"/><path d="M14 15v2a1 1 0 01-1 1H6l-3 3V11a1 1 0 011-1h2"/></svg>
-<span>留言板</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span></span></li></ol></li></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E5%B9%B2%E8%B4%A7/ style=background-color:#beefe5;color:#0f3d34>干货
-</a><a href=/categories/%E6%8A%98%E8%85%BE/ style=background-color:#efeabe;color:#3d390f>折腾</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/4/>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)</a></h2></div><footer class=article-meta><div class=inline-meta><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published datetime=2018-12-01T19:27:00Z>Saturday, December 1, 2018</time>
-<svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading></time></div></footer></div></header><section class=article-content><blockquote><p>本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&mldr;&mldr;</p></blockquote><p>#新建虚拟主机
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上) - 爱世界 N</title><link rel=icon href=/assets/img/avatar.png><style>:root{--bg:#0d1117;--card-bg:#161b22;--text:#c9d1d9;--heading:#f0f6fc;--accent:#58a6ff;--border:#30363d;--meta:#8b949e;--code-bg:#1f242c}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.7}header{padding:2.5rem 1rem 1.5rem;text-align:center;border-bottom:1px solid var(--border);background:rgba(13,17,23,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:100}.site-title{margin:0 0 .5rem;font-size:1.8rem}.site-title a{color:var(--heading);text-decoration:none;font-weight:700}nav a{margin:0 .75rem;color:var(--accent);text-decoration:none;font-size:.95rem;transition:color .2s}nav a:hover{color:#79c0ff;text-decoration:underline}main{max-width:820px;margin:2.5rem auto;padding:0 1.25rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.75rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,.15)}article h1,article h2{margin-top:0;color:var(--heading)}article h2 a{color:var(--heading);text-decoration:none;transition:color .2s}article h2 a:hover{color:var(--accent)}.meta{color:var(--meta);font-size:.875rem;margin-bottom:1.2rem}.content img{max-width:100%;height:auto;border-radius:6px;display:block;margin:1.5rem auto}.content pre{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:1rem;overflow-x:auto}.content code{font-family:ui-monospace,SFMono-Regular,sf mono,Menlo,Consolas,monospace;font-size:.9em}.content p code{background:var(--code-bg);padding:.2em .4em;border-radius:4px;border:1px solid var(--border)}.content a{color:var(--accent);text-decoration:none}.content a:hover{text-decoration:underline}footer{text-align:center;padding:2.5rem 1rem;color:var(--meta);border-top:1px solid var(--border);font-size:.9rem}.author-box{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2rem}.author-avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><div class=site-title><a href=/>爱世界 N</a></div><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(上)</h1><div class=meta>发布时间：2018-12-01 19:27</div><div class=content><blockquote><p>本文主要讲述使用VPS安装Nextcloud、DirectoryLister、Aria2、AriaNg等服务来实现备份、下载、串流播放等功能&mldr;&mldr;</p></blockquote><p>#新建虚拟主机
 首先我们需要新建三个虚拟主机、假设三个虚拟主机网址分别为<code>cloud.test.com</code>、<code>dd.test.com</code>、<code>ar.test.com</code>,
-在<code>lnmp</code>目录下运行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./vhost.sh
-</span></span></code></pre></td></tr></table></div></div><p>接着根据提示创建即可
+在<code>lnmp</code>目录下运行：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>./vhost.sh
+</span></span></code></pre></div><p>接着根据提示创建即可
 #安装DirectoryLister
 LNMP创建的网站根目录为<code>/data/wwwroot/dd.test.com</code>
 ##官网下载安装
-<a class=link href=https://www.directorylister.com/ target=_blank rel=noopener>DirectoryLister官网</a>
+<a href=https://www.directorylister.com/>DirectoryLister官网</a>
 ##使用魔改版DirectoryLister
-这里的魔改版DirectoryLister由<a class=link href=https://github.com/ToyoDAdoubi/DirectoryLister target=_blank rel=noopener>逗比</a>大佬提供
-网站根目录运行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git clone https://github.com/ToyoDAdoubi/DirectoryLister.git
-</span></span></code></pre></td></tr></table></div></div><p>##文件结构</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>/data/wwwroot/dd.test.com
-</span></span><span class=line><span class=cl>├─ resources
-</span></span><span class=line><span class=cl>│   ├ themes
-</span></span><span class=line><span class=cl>│   │ └ bootstrap
-</span></span><span class=line><span class=cl>│   │    └ .....
-</span></span><span class=line><span class=cl>│   │
-</span></span><span class=line><span class=cl>│   ├ DirectoryLister.php
-</span></span><span class=line><span class=cl>│   ├ config.php
-</span></span><span class=line><span class=cl>│   └ fileTypes.php
-</span></span><span class=line><span class=cl>│
-</span></span><span class=line><span class=cl>├ README.html # 文件夹内的 说明简介文件 #
-</span></span><span class=line><span class=cl>├ index.php
-</span></span><span class=line><span class=cl>│
-</span></span><span class=line><span class=cl>├─ 测试文件夹
-</span></span><span class=line><span class=cl>│   ├ 测试文件.txt
-</span></span><span class=line><span class=cl>│   └ README.html # 文件夹内的 说明简介文件 #
-</span></span><span class=line><span class=cl>│
-</span></span><span class=line><span class=cl>└ 测试文件.txt
-</span></span><span class=line><span class=cl>  
-</span></span><span class=line><span class=cl> 绝对路径分别为：
-</span></span><span class=line><span class=cl>/data/wwwroot/dd.test.com/resources/
-</span></span><span class=line><span class=cl>/data/wwwroot/dd.test.com/README.html
-</span></span><span class=line><span class=cl>/data/wwwroot/dd.test.com/index.php
-</span></span><span class=line><span class=cl>/data/wwwroot/dd.test.com/测试文件夹/
-</span></span><span class=line><span class=cl>/data/wwwroot/dd.test.com/测试文件.txt
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>一些注意事项见中篇
+这里的魔改版DirectoryLister由<a href=https://github.com/ToyoDAdoubi/DirectoryLister>逗比</a>大佬提供
+网站根目录运行：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/ToyoDAdoubi/DirectoryLister.git
+</span></span></code></pre></div><p>##文件结构</p><pre tabindex=0><code>/data/wwwroot/dd.test.com
+├─ resources
+│   ├ themes
+│   │ └ bootstrap
+│   │    └ .....
+│   │
+│   ├ DirectoryLister.php
+│   ├ config.php
+│   └ fileTypes.php
+│
+├ README.html # 文件夹内的 说明简介文件 #
+├ index.php
+│
+├─ 测试文件夹
+│   ├ 测试文件.txt
+│   └ README.html # 文件夹内的 说明简介文件 #
+│
+└ 测试文件.txt
+  
+ 绝对路径分别为：
+/data/wwwroot/dd.test.com/resources/
+/data/wwwroot/dd.test.com/README.html
+/data/wwwroot/dd.test.com/index.php
+/data/wwwroot/dd.test.com/测试文件夹/
+/data/wwwroot/dd.test.com/测试文件.txt
+</code></pre><blockquote><p>一些注意事项见中篇
 #安装Aria2及AriaNG
 ##安装依赖包
-首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install wget screen unzip gcc
-</span></span><span class=line><span class=cl>sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev  zlib1g-dev libsqlite3-dev pkg-config
-</span></span></code></pre></td></tr></table></div></div><p><img loading=lazy sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src=https://ws1.sinaimg.cn/large/006uw7syly1fxrhlf6lebj30nj05cdfy.jpg>
+首先我么需要安装以下依赖包，来使Aria2能够下载图中的文件类型</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install wget screen unzip gcc
+</span></span><span style=display:flex><span>sudo apt install -y libgnutls-dev nettle-dev libgmp-dev libssh2-1-dev libc-ares-dev libxml2-dev  zlib1g-dev libsqlite3-dev pkg-config
+</span></span></code></pre></div><p><img src=https://ws1.sinaimg.cn/large/006uw7syly1fxrhlf6lebj30nj05cdfy.jpg alt>
 ##安装Aria2
 ###方式一、手动编译安装
-运行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install auto-apt checkinstall
-</span></span><span class=line><span class=cl><span class=nb>cd</span> /root
-</span></span><span class=line><span class=cl>wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz
-</span></span><span class=line><span class=cl>tar xzvf aria2-1.33.1.tar.gz
-</span></span><span class=line><span class=cl><span class=nb>cd</span> aria2-1.33.1
-</span></span><span class=line><span class=cl>auto-apt run ./configure
-</span></span><span class=line><span class=cl>make
-</span></span><span class=line><span class=cl>checkinstall
-</span></span></code></pre></td></tr></table></div></div><p>这样会生成一个deb包，卸载和重新安装就非常方便了
+运行以下命令：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt install auto-apt checkinstall
+</span></span><span style=display:flex><span>cd /root
+</span></span><span style=display:flex><span>wget https://github.com/aria2/aria2/releases/download/release-1.33.1/aria2-1.33.1.tar.gz
+</span></span><span style=display:flex><span>tar xzvf aria2-1.33.1.tar.gz
+</span></span><span style=display:flex><span>cd aria2-1.33.1
+</span></span><span style=display:flex><span>auto-apt run ./configure
+</span></span><span style=display:flex><span>make
+</span></span><span style=display:flex><span>checkinstall
+</span></span></code></pre></div><p>这样会生成一个deb包，卸载和重新安装就非常方便了
 ###方式二、一键脚本安装（建议）
 还是推荐一键脚本安装，比手动编译会少很多问题&mldr;..
-使用逗比大佬的一键脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh <span class=o>&amp;&amp;</span> chmod +x aria2.sh <span class=o>&amp;&amp;</span> bash aria2.sh
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 如果上面这个脚本无法下载，尝试使用备用下载：</span>
-</span></span><span class=line><span class=cl>wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh <span class=o>&amp;&amp;</span> chmod +x aria2.sh <span class=o>&amp;&amp;</span> bash aria2.sh
-</span></span></code></pre></td></tr></table></div></div><p>根据脚本提示安装即可</p><blockquote><p>其中，<code>aria2.conf</code>配置文件需要做一些修改，我会另开一篇文章详细说明
+使用逗比大佬的一键脚本：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>wget -N --no-check-certificate https://softs.loan/Bash/aria2.sh <span style=color:#f92672>&amp;&amp;</span> chmod +x aria2.sh <span style=color:#f92672>&amp;&amp;</span> bash aria2.sh
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 如果上面这个脚本无法下载，尝试使用备用下载：</span>
+</span></span><span style=display:flex><span>wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/aria2.sh <span style=color:#f92672>&amp;&amp;</span> chmod +x aria2.sh <span style=color:#f92672>&amp;&amp;</span> bash aria2.sh
+</span></span></code></pre></div><p>根据脚本提示安装即可</p><blockquote><p>其中，<code>aria2.conf</code>配置文件需要做一些修改，我会另开一篇文章详细说明
 #安装AriaNG
-到网站根目录，这里是<code>ar.test.com</code>运行</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip
-</span></span></code></pre></td></tr></table></div></div><p>之后解压，然后访问你的域名填写Aria2的密钥即可
+到网站根目录，这里是<code>ar.test.com</code>运行</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>wget https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip
+</span></span></code></pre></div><p>之后解压，然后访问你的域名填写Aria2的密钥即可
 #安装Nextcloud
 ##添加MySQL
 在安装Nextcloud之前，我们需要在MySQL中添加一下账户及数据库
-访问你的IP，会出现OneinStack的界面<img loading=lazy sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src=https://ws1.sinaimg.cn/large/006uw7syly1fxri4shvu9j30zc0j2wgq.jpg>
+访问你的IP，会出现OneinStack的界面<img src=https://ws1.sinaimg.cn/large/006uw7syly1fxri4shvu9j30zc0j2wgq.jpg alt>
 点击<code>phpMyAdmin</code>，登陆后，点击账户，新增用户账户，然后按照如图所示操作
-<img loading=lazy sizes="(max-width: 767px) calc(100vw - 30px), (max-width: 1023px) 700px, (max-width: 1279px) 950px, 1232px" src=https://ws1.sinaimg.cn/large/006uw7syly1fxria4fofyj30s90gmwg8.jpg>
+<img src=https://ws1.sinaimg.cn/large/006uw7syly1fxria4fofyj30s90gmwg8.jpg alt>
 最后点击最下面的<code>执行</code>
 这样，MySQL部分完毕
 ##安装Nextcloud
 首先进入到网站根目录<code>cloud.test.com</code>
-然后下载Nextcloud</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip
-</span></span></code></pre></td></tr></table></div></div><p>下载完后解压，输入域名进行接下来的安装即可
-至此，Nextcloud安装完毕</p><blockquote><p>安装错误等问题见中篇&mldr;&mldr;</p></blockquote><blockquote><p>参考：<br><a class=link href=https://github.com/ToyoDAdoubi/DirectoryLister target=_blank rel=noopener>一个逗比魔改的Directory Lister~</a><br><a class=link href=https://github.com/mayswind/AriaNg target=_blank rel=noopener>AriaNg</a><br><a class=link href=https://doub.io/shell-jc4/ target=_blank rel=noopener>『原创』BT/种子/磁力链接下载工具 —— Aria2 一键安装管理脚本</a></p></blockquote></section><footer class="article-meta article-footer"><section class=article-tags><a href=/tags/nas/>NAS</a>
-<a href=/tags/nextcloud/>Nextcloud</a>
-<a href=/tags/directorylister/>DirectoryLister</a>
-<a href=/tags/aria2/>Aria2</a>
-<a href=/tags/ariang/>AriaNg</a></section><section class="article-copyright inline-meta"><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under <a class=link href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank rel=noopener>CC BY-NC 4.0</a></span></section></footer></article><aside><h2 class=section-title></h2><div class=subsection-list><div class=article-list--tile><article><a href=/posts/5/><div class=article-details><h2 class=article-title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中)</h2></div></a></article><article><a href=/posts/6/><div class=article-details><h2 class=article-title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(下)</h2></div></a></article><article><a href=/posts/20/><div class=article-details><h2 class=article-title>ZeriTier 安装使用、自建 MOON 节点、进阶使用</h2></div></a></article><article><a href=/posts/19/><div class=article-details><h2 class=article-title>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇</h2></div></a></article><article><a href=/posts/18/><div class=article-details><h2 class=article-title>小米平板5 Pro ROOT</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=light data-lang=zh-CN data-loading=lazy crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
-2018 -
-2026 爱世界 N</section><section class=powerby><br></section><link rel=stylesheet href=/plugins/pio/pio.css><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></footer><script type=module>
-    import gallery from '\/ts\/gallery.js';
-
-    const articleContent = document.querySelector('.article-content');
-    const shouldLoad = articleContent && (articleContent.querySelectorAll('figure').length > 0 || articleContent.querySelectorAll('img.gallery-image').length > 0);
-    
-    if (shouldLoad) {
-        gallery(articleContent);
-
-        const PhotoSwipeLightbox = (await import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js")).default;
-        const styleHref = "https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.css";
-
-        const styleTag = document.createElement('link');
-        styleTag.rel = 'stylesheet';
-        styleTag.href = styleHref;
-        document.head.appendChild(styleTag);
-
-        const lightbox = new PhotoSwipeLightbox({
-            gallerySelector: '.article-content',
-            childSelector: 'figure a.image-link',
-            pswpModule: () => import("https:\/\/cdn.jsdelivr.net\/npm\/photoswipe@5.4.4\/dist\/photoswipe.esm.min.js")
-        });
-        lightbox.init();
-    }
-</script></main></div><script type=text/javascript src=/ts/main.d00997a2f4a6ce525f496da0c3ae6ad392b0468b8a9024f23309fdfc75c67a35.js defer></script></body></html>
+然后下载Nextcloud</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>wget https://download.nextcloud.com/server/releases/nextcloud-14.0.4.zip
+</span></span></code></pre></div><p>下载完后解压，输入域名进行接下来的安装即可
+至此，Nextcloud安装完毕</p><blockquote><p>安装错误等问题见中篇&mldr;&mldr;</p></blockquote><blockquote><p>参考：<br><a href=https://github.com/ToyoDAdoubi/DirectoryLister>一个逗比魔改的Directory Lister~</a><br><a href=https://github.com/mayswind/AriaNg>AriaNg</a><br><a href=https://doub.io/shell-jc4/>『原创』BT/种子/磁力链接下载工具 —— Aria2 一键安装管理脚本</a></p></blockquote></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2018 - 2026 ResidualBlood. 保留所有权利。</p><p>Powered by Hugo (Official Latest) & Cloudflare Pages.</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>
