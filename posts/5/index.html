@@ -1,32 +1,27 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中) - 爱世界 N</title><link rel=icon href=/assets/img/avatar.png><style>:root{--bg:#0d1117;--card-bg:#161b22;--text:#c9d1d9;--heading:#f0f6fc;--accent:#58a6ff;--border:#30363d;--meta:#8b949e;--code-bg:#1f242c}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.7}header{padding:2.5rem 1rem 1.5rem;text-align:center;border-bottom:1px solid var(--border);background:rgba(13,17,23,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:100}.site-title{margin:0 0 .5rem;font-size:1.8rem}.site-title a{color:var(--heading);text-decoration:none;font-weight:700}nav a{margin:0 .75rem;color:var(--accent);text-decoration:none;font-size:.95rem;transition:color .2s}nav a:hover{color:#79c0ff;text-decoration:underline}main{max-width:820px;margin:2.5rem auto;padding:0 1.25rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.75rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,.15)}article h1,article h2{margin-top:0;color:var(--heading)}article h2 a{color:var(--heading);text-decoration:none;transition:color .2s}article h2 a:hover{color:var(--accent)}.meta{color:var(--meta);font-size:.875rem;margin-bottom:1.2rem}.content img{max-width:100%;height:auto;border-radius:6px;display:block;margin:1.5rem auto}.content pre{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:1rem;overflow-x:auto}.content code{font-family:ui-monospace,SFMono-Regular,sf mono,Menlo,Consolas,monospace;font-size:.9em}.content p code{background:var(--code-bg);padding:.2em .4em;border-radius:4px;border:1px solid var(--border)}.content a{color:var(--accent);text-decoration:none}.content a:hover{text-decoration:underline}footer{text-align:center;padding:2.5rem 1rem;color:var(--meta);border-top:1px solid var(--border);font-size:.9rem}.author-box{display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2rem}.author-avatar{width:64px;height:64px;border-radius:50%;border:2px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><div class=site-title><a href=/>爱世界 N</a></div><nav><a href=/>首页</a>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中) - 爱世界 N</title><link rel=icon href=/assets/img/avatar.png><style>:root{--bg:#0d1117;--card-bg:#161b22;--text:#c9d1d9;--heading:#f0f6fc;--accent:#58a6ff;--border:#30363d;--meta:#8b949e;--code-bg:#1f242c}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.7}header{padding:2.5rem 1rem 1.5rem;text-align:center;border-bottom:1px solid var(--border);background:rgba(13,17,23,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:100}.site-title{margin:0 0 .5rem;font-size:1.8rem}.site-title a{color:var(--heading);text-decoration:none;font-weight:700}nav a{margin:0 .75rem;color:var(--accent);text-decoration:none;font-size:.95rem;transition:color .2s}nav a:hover{color:#79c0ff;text-decoration:underline}main{max-width:820px;margin:2.5rem auto;padding:0 1.25rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.75rem;margin-bottom:2rem;box-shadow:0 4px 12px rgba(0,0,0,.15)}article h1,article h2{margin-top:0;color:var(--heading)}article h2 a{color:var(--heading);text-decoration:none;transition:color .2s}article h2 a:hover{color:var(--accent)}.meta{color:var(--meta);font-size:.875rem;margin-bottom:1.2rem}.content img{max-width:100%;height:auto;border-radius:6px;display:block;margin:1.5rem auto}.content pre{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;padding:1rem;overflow-x:auto}.content code{font-family:ui-monospace,SFMono-Regular,sf mono,Menlo,Consolas,monospace;font-size:.9em}.content p code{background:var(--code-bg);padding:.2em .4em;border-radius:4px;border:1px solid var(--border)}.content a{color:var(--accent);text-decoration:none}.content a:hover{text-decoration:underline}footer{text-align:center;padding:2.5rem 1rem;color:var(--meta);border-top:1px solid var(--border);font-size:.9rem}.page-btn{padding:.5rem 1rem;background:var(--card-bg);border:1px solid var(--border);color:var(--accent);text-decoration:none;border-radius:6px;font-size:.9rem;transition:all .2s}.page-btn:hover{border-color:var(--accent);background:#1c2128}.author-box{display:flex;align-items:center;justify-content:center;gap:1.25rem;margin-bottom:2.5rem;padding:1.5rem;background:var(--card-bg);border:1px solid var(--border);border-radius:8px}.author-avatar{width:72px;height:72px;border-radius:50%;border:2px solid var(--accent);object-fit:cover;display:block}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><div class=site-title><a href=/>爱世界 N</a></div><nav><a href=/>首页</a>
 <a href=/about/>关于我</a>
 <a href=/youlian/>友链</a>
 <a href=/liuyan/>留言板</a>
-<a href=/guidang/>归档</a></nav></header><main><article><h1>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中)</h1><div class=meta>发布时间：2018-12-08 11:49</div><div class=content><blockquote><p>本文主要讲述Directory Lister、Aria2、Nextcloud的配置问题</p></blockquote><p>#一、Directory Lister篇 来自逗比大佬
-#不显示文件和目录
-如果安装 lnmp一键包上传Directory Lister后，Directory Lister不显示文件和目录，那么可能是 PHP函数 <code>scandir </code>被禁用了，取消禁用即可。</p><pre tabindex=0><code>sed -i &#39;s/,scandir//g&#39; /usr/local/php/etc/php.ini
+<a href=/guidang/>归档</a></nav></header><main><article><h1>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(中)</h1><div class=meta><span>📅 发布时间：2018-12-08 11:49</span>
+<span style=margin-left:1rem>📂 分类：干货, 折腾</span>
+<span style=margin-left:1rem>🏷️ 标签：Nextcloud, Aria2, Directory Lister</span></div><div class=content><blockquote><p>本文主要讲述Directory Lister、Aria2、Nextcloud的配置问题</p></blockquote><h1 id=一directory-lister篇-来自逗比大佬>一、Directory Lister篇 来自逗比大佬</h1><h1 id=不显示文件和目录>不显示文件和目录</h1><p>如果安装 lnmp一键包上传Directory Lister后，Directory Lister不显示文件和目录，那么可能是 PHP函数 <code>scandir </code>被禁用了，取消禁用即可。</p><pre tabindex=0><code>sed -i &#39;s/,scandir//g&#39; /usr/local/php/etc/php.ini
 # 取消scandir函数禁用
 /etc/init.d/php-fpm restart
 # 重启 PHP生效
-</code></pre><p>##简介功能说明
-使用这个功能，需要打开 <code>resources\themes\bootstrap\index.php</code> 文件，找到第五行的：</p><pre tabindex=0><code>$md_path = explode(&#34;com&#34;, $md_path_all);
-</code></pre><p>把 <code>com</code> 改成你的域名后缀(比如 <code>xxx.cn</code> 就是改成 <code>cn</code> )，当初只是自用，现在一开源，我给忘了。</p><p>反正就是每个文件夹下面放一个 <code>README.html</code> 文件，这个文件里写着 简介说明内容即可。</p><p>为了避免中文乱码，把 <code>README.html</code> 文件用 <code>UTF-8 无BOM 编码 </code>保存！
-##文件修改说明
-文件修改说明修改网站中头部导航标题，去这个文件里搜索 <code>DOUBI Soft</code> 然后全部替换为自己要改的。</p><pre tabindex=0><code>\resources\DirectoryLister.php
+</code></pre><h2 id=简介功能说明>简介功能说明</h2><p>使用这个功能，需要打开 <code>resources\themes\bootstrap\index.php</code> 文件，找到第五行的：</p><pre tabindex=0><code>$md_path = explode(&#34;com&#34;, $md_path_all);
+</code></pre><p>把 <code>com</code> 改成你的域名后缀(比如 <code>xxx.cn</code> 就是改成 <code>cn</code> )，当初只是自用，现在一开源，我给忘了。</p><p>反正就是每个文件夹下面放一个 <code>README.html</code> 文件，这个文件里写着 简介说明内容即可。</p><p>为了避免中文乱码，把 <code>README.html</code> 文件用 <code>UTF-8 无BOM 编码 </code>保存！</p><h2 id=文件修改说明>文件修改说明</h2><p>文件修改说明修改网站中头部导航标题，去这个文件里搜索 <code>DOUBI Soft</code> 然后全部替换为自己要改的。</p><pre tabindex=0><code>\resources\DirectoryLister.php
 </code></pre><p>修改网站标签栏的标题，去这个文件里把开头 <code>&lt;title> </code>标签中的<code> DOUBI Soft</code> 替换为自己要改的。</p><pre tabindex=0><code>\resources\themes\bootstrap\index.php
 </code></pre><p>修改网站顶部公告栏内容，去这个文件里搜索 <code>顶部公告栏</code> 或者找到第 72 行。</p><pre tabindex=0><code>\resources\themes\bootstrap\index.php
 </code></pre><p>网站头部公共文件：</p><pre tabindex=0><code>\resources\themes\bootstrap\default_header.php
 </code></pre><p>网站底部公共文件：</p><pre tabindex=0><code>\resources\themes\bootstrap\default_footer.php
-</code></pre><p>如果想要插入流量统计代码，那只需要把代码写到 <code>default_header.php</code> 文件内即可。
-#二、Aria2配置
-这里贴上我的Aria2配置，文件路径<code>/root/.aria2.conf</code></p><pre tabindex=0><code>## &#39;#&#39;开头为注释内容, 选项都有相应的注释说明, 根据需要修改 ##
+</code></pre><p>如果想要插入流量统计代码，那只需要把代码写到 <code>default_header.php</code> 文件内即可。</p><h1 id=二aria2配置>二、Aria2配置</h1><p>这里贴上我的Aria2配置，文件路径<code>/root/.aria2.conf</code></p><pre tabindex=0><code>## &#39;#&#39;开头为注释内容, 选项都有相应的注释说明, 根据需要修改 ##
 ## 被注释的选项填写的是默认值, 建议在需要修改时再取消注释  ##
 
 ## 文件保存相关 ##
 # 文件的保存路径(可使用绝对路径或相对路径), 默认: 当前启动位置
 dir=/data/wwwroot/dd.test.com/download
 # 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M
-#disk-cache=32M
+# disk-cache=32M
 # 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc
 # 预分配所需时间: none &lt; falloc ? trunc &lt; prealloc
 # falloc和trunc则需要文件系统和内核支持
@@ -46,13 +41,13 @@ min-split-size=10M
 # 单个任务最大线程数, 添加时可指定, 默认:5
 split=20
 # 整体下载速度限制, 运行时可修改, 默认:0
-#max-overall-download-limit=0
+# max-overall-download-limit=0
 # 单个任务下载速度限制, 默认:0
-#max-download-limit=0
+# max-download-limit=0
 # 整体上传速度限制, 运行时可修改, 默认:0
 max-overall-upload-limit=1M
 # 单个任务上传速度限制, 默认:0
-#max-upload-limit=1000
+# max-upload-limit=1000
 # 禁用IPv6, 默认:false
 disable-ipv6=false
 
@@ -72,15 +67,15 @@ rpc-allow-origin-all=true
 # 允许非外部访问, 默认:false
 rpc-listen-all=true
 # 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同
-#event-poll=select
+# event-poll=select
 # RPC监听端口, 端口被占用时可以修改, 默认:6800
 rpc-listen-port=6800
 # 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
 rpc-secret=你自己设置一个密码
 # 设置的RPC访问用户名, 此选项新版已废弃, 建议改用 --rpc-secret 选项
-#rpc-user=&lt;USER&gt;
+# rpc-user=&lt;USER&gt;
 # 设置的RPC访问密码, 此选项新版已废弃, 建议改用 --rpc-secret 选项
-#rpc-passwd=&lt;PASSWD&gt;
+# rpc-passwd=&lt;PASSWD&gt;
 # 是否启用 RPC 服务的 SSL/TLS 加密,
 # 启用加密后 RPC 服务需要使用 https 或者 wss 协议连接
 rpc-secure=true
@@ -95,19 +90,19 @@ follow-torrent=true
 # BT监听端口, 当端口被屏蔽时使用, 默认:6881-6999
 listen-port=51413
 # 单个种子最大连接数, 默认:55
-#bt-max-peers=55
+# bt-max-peers=55
 # 打开DHT功能, PT需要禁用, 默认:true
 enable-dht=true
 # 打开IPv6 DHT功能, PT需要禁用
-#enable-dht6=false
+# enable-dht6=false
 # DHT网络监听端口, 默认:6881-6999
-#dht-listen-port=6881-6999
+# dht-listen-port=6881-6999
 # 本地节点查找, PT需要禁用, 默认:false
-#bt-enable-lpd=true
+# bt-enable-lpd=true
 # 种子交换, PT需要禁用, 默认:true
 enable-peer-exchange=true
 # 每个种子限速, 对少种的PT很有用, 默认:50K
-#bt-request-peer-speed-limit=50K
+# bt-request-peer-speed-limit=50K
 # 客户端伪装, PT需要
 peer-id-prefix=-TR2770-
 user-agent=Transmission/2.77
@@ -115,33 +110,22 @@ user-agent=Transmission/2.77
 seed-ratio=0.000001
 # 强制保存会话, 即使任务已经完成, 默认:false
 # 较新的版本开启后会在任务完成后依然保留.aria2文件
-#force-save=false
+# force-save=false
 # BT校验相关, 默认:true
-#bt-hash-check-seed=true
+# bt-hash-check-seed=true
 # 继续之前的BT任务时, 无需再次校验, 默认:false
 bt-seed-unverified=true
 # 保存磁力链接元数据为种子文件(.torrent文件), 默认:false
-#bt-save-metadata=true
-</code></pre><p>#注意事项
-##一、保存路径
-保存路径最好放在<code>Directory Lister</code>目录下，这样方便直接访问
-如果你放在其他目录，<code>Directory Lister</code>目录下放软链接可能会发生错误。
-##进度保存
-记得把进度保存相关设置前的注释取消掉，就像配置文件第38~44行
-##RPC相关设置
-密码在第58行修改
-由于我们使用全站https，所以在配置文件第67、69行需要填写你的网站证书路径，按照我的上一篇文章建站的话，把<code>ar.test.com</code>替换成你的域名即可。
-##定时更新bt-tracker
-如果你使用逗比大佬的脚本并开启了定时更新bt-tracker，那么会有更新过后Aria2没有启动问题，所以解决方法就是添加一个定时任务：</p><pre tabindex=0><code>crontab -e
+# bt-save-metadata=true
+</code></pre><h1 id=注意事项>注意事项</h1><h2 id=一保存路径>一、保存路径</h2><p>保存路径最好放在<code>Directory Lister</code>目录下，这样方便直接访问
+如果你放在其他目录，<code>Directory Lister</code>目录下放软链接可能会发生错误。</p><h2 id=进度保存>进度保存</h2><p>记得把进度保存相关设置前的注释取消掉，就像配置文件第38~44行</p><h2 id=rpc相关设置>RPC相关设置</h2><p>密码在第58行修改
+由于我们使用全站https，所以在配置文件第67、69行需要填写你的网站证书路径，按照我的上一篇文章建站的话，把<code>ar.test.com</code>替换成你的域名即可。</p><h2 id=定时更新bt-tracker>定时更新bt-tracker</h2><p>如果你使用逗比大佬的脚本并开启了定时更新bt-tracker，那么会有更新过后Aria2没有启动问题，所以解决方法就是添加一个定时任务：</p><pre tabindex=0><code>crontab -e
 在0 3 * * 1 /bin/bash /root/aria2.sh update-bt-tracker下添加
 2 3 * * 1 /bin/bash service aria2 start
-</code></pre><p>保存即可。
-#三、Nextcloud排错</p><p>#1. PHP 被设置为移除内联块, 这将导致多个核心应用无法访问
-问题：准备LNMP环境和上面一样，只是在LNMP 1.4和OneinStack安装时选择Nginx环境即可，其它的组件都一样有选择性地安装。如果安装了Zend OPcache，可能在安装时会提示错误：<code>“PHP 被设置为移除内联块, 这将导致多个核心应用无法访问。</code></p><p>解决方法：修改<code>php.ini</code>中Opcache的参数进行修改，如果是Oneinstack的话需要在<code>/usr/local/php/etc/php.d/02-opcache.ini</code> 中修改。找到此代码并改成：<code>opcache.save_comments=1</code> ，因为默认是0，改完重启php-fpm就行。</p><pre tabindex=0><code>nano /usr/local/php/etc/php.d/02-opcache.ini
+</code></pre><p>保存即可。</p><h1 id=三nextcloud排错>三、Nextcloud排错</h1><h1 id=1-php-被设置为移除内联块-这将导致多个核心应用无法访问>1. PHP 被设置为移除内联块, 这将导致多个核心应用无法访问</h1><p>问题：准备LNMP环境和上面一样，只是在LNMP 1.4和OneinStack安装时选择Nginx环境即可，其它的组件都一样有选择性地安装。如果安装了Zend OPcache，可能在安装时会提示错误：<code>“PHP 被设置为移除内联块, 这将导致多个核心应用无法访问。</code></p><p>解决方法：修改<code>php.ini</code>中Opcache的参数进行修改，如果是Oneinstack的话需要在<code>/usr/local/php/etc/php.d/02-opcache.ini</code> 中修改。找到此代码并改成：<code>opcache.save_comments=1</code> ，因为默认是0，改完重启php-fpm就行。</p><pre tabindex=0><code>nano /usr/local/php/etc/php.d/02-opcache.ini
 opcache.save_comments=1 #将0改成１
-</code></pre><p>##2. 出现错误：No input file specified.
-一般来说，在添加虚拟主机那一步选择<code>rewrite</code>的时候选择<code>nextcloud</code>不会出现这个问题，如果还有问题按照以下步骤来解决
-编写URL地址重写规则。出现错误：No input file specified.，主要是Nginx还需要自己写重写规则，你可以将以下规则复制粘贴到/usr/local/nginx/conf/vhost/你的网站.conf，具体规则如下：</p><pre tabindex=0><code>#(可选)添加如下header主要为了安全
+</code></pre><h2 id=2-出现错误no-input-file-specified>2. 出现错误：No input file specified.</h2><p>一般来说，在添加虚拟主机那一步选择<code>rewrite</code>的时候选择<code>nextcloud</code>不会出现这个问题，如果还有问题按照以下步骤来解决
+编写URL地址重写规则。出现错误：No input file specified.，主要是Nginx还需要自己写重写规则，你可以将以下规则复制粘贴到/usr/local/nginx/conf/vhost/你的网站.conf，具体规则如下：</p><pre tabindex=0><code># (可选)添加如下header主要为了安全
     add_header X-Content-Type-Options nosniff;
     add_header X-XSS-Protection &#34;1; mode=block&#34;;
     add_header X-Robots-Tag none;
@@ -205,25 +189,19 @@ opcache.save_comments=1 #将0改成１
     try_files $uri /index.php$uri$is_args$args;
     access_log off;
     }
-</code></pre><p>#3. 模块‘fileinfo’缺失
-fileinfo\Memcached\Redis等都可以通过OneinStack一键安装。
-具体方法见上篇
-#4. 没有安装 &ldquo;smbclient&rdquo;. 无法挂载 &ldquo;SMB / CIFS&rdquo;（测试未通过）
-安装：</p><pre tabindex=0><code>apt-get install smbclient
+</code></pre><h1 id=3-模块fileinfo缺失>3. 模块‘fileinfo’缺失</h1><p>fileinfo\Memcached\Redis等都可以通过OneinStack一键安装。
+具体方法见上篇</p><h1 id=4-没有安装-smbclient-无法挂载-smb--cifs测试未通过>4. 没有安装 &ldquo;smbclient&rdquo;. 无法挂载 &ldquo;SMB / CIFS&rdquo;（测试未通过）</h1><p>安装：</p><pre tabindex=0><code>apt-get install smbclient
 apt-get install php-smbclient
-</code></pre><blockquote><p>反正我安装过后问题没解决&mldr;..解决问题的朋友们可以在评论区留言</p></blockquote><p>#5. 内存缓存未配置</p><pre tabindex=0><code>&#39;memcache.local&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
+</code></pre><blockquote><p>反正我安装过后问题没解决&mldr;..解决问题的朋友们可以在评论区留言</p></blockquote><h1 id=5-内存缓存未配置>5. 内存缓存未配置</h1><pre tabindex=0><code>&#39;memcache.local&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
 &#39;memcache.locking&#39; =&gt; &#39;\OC\Memcache\Redis&#39;,
 &#39;redis&#39; =&gt; array(
      &#39;host&#39; =&gt; &#39;localhost&#39;,
      &#39;port&#39; =&gt; 6379,
       ),
-</code></pre><p>#6. 一些文件没有通过完整性检查
-参数解释如下，自行判读，</p><pre tabindex=0><code>INVALID_HASH 　　#错误的文件，需要使用正确的替换
+</code></pre><h1 id=6-一些文件没有通过完整性检查>6. 一些文件没有通过完整性检查</h1><p>参数解释如下，自行判读，</p><pre tabindex=0><code>INVALID_HASH 　　#错误的文件，需要使用正确的替换
 EXTRA_FILE 　　　#多余的文件，需要删除
 EXCEPTION　　　　 #错误信息
-</code></pre><p><strong>在你解压完nextcloud，并把解压后文件移动到网站根目录的时候，记得检查下是否所有文件都移动过去了，因为解压文件里有两个隐藏文件&mldr;..</strong>
-#7. 三种方式管理后台任务
-三种方式管理后台任务，默认为<code>AJAX</code>,但是推荐用 <code>cron</code></p><pre tabindex=0><code># www用户添加后台任务
+</code></pre><p><strong>在你解压完nextcloud，并把解压后文件移动到网站根目录的时候，记得检查下是否所有文件都移动过去了，因为解压文件里有两个隐藏文件&mldr;..</strong></p><h1 id=7-三种方式管理后台任务>7. 三种方式管理后台任务</h1><p>三种方式管理后台任务，默认为<code>AJAX</code>,但是推荐用 <code>cron</code></p><pre tabindex=0><code># www用户添加后台任务
 crontab -u www -e
 # 填写如下字段，注意目录地址
 */15 * * * * php -f /www/wwwroot/cloud.test.com/ cron.php
@@ -232,6 +210,5 @@ crontab -u www -e
 crontab -u www -l
 # 输出如下说明成功
 */15 * * * * php -f /www/wwwroot/cloud.test.com/ cron.php
-</code></pre><p>#Nextcloud出现“内部服务器错误”
-这个问题的出现是由于文件夹权限设置的不到位。</p><pre tabindex=0><code>chown -R www:www  你的网站目录
+</code></pre><h1 id=nextcloud出现内部服务器错误>Nextcloud出现“内部服务器错误”</h1><p>这个问题的出现是由于文件夹权限设置的不到位。</p><pre tabindex=0><code>chown -R www:www  你的网站目录
 </code></pre><p>这一点很重要！！！</p><blockquote><p>参考：<br><a href=https://github.com/ToyoDAdoubi/DirectoryLister>一个逗比魔改的Directory Lister~</a><br><a href=https://doub.io/shell-jc4/>『原创』BT/种子/磁力链接下载工具 —— Aria2 一键安装管理脚本</a><br><a href=https://wzfou.com/nextcloud-install/>手动安装NextCloud教程-免费开源的私有云存储网盘可播放图片音乐</a></p></blockquote></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2018 - 2026 ResidualBlood. 保留所有权利。</p><p>Powered by Hugo (Official Latest) & Cloudflare Pages.</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>
