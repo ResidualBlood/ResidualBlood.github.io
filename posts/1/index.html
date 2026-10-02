@@ -1,0 +1,45 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>VPS 选择，测试，升级 - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>VPS 选择，测试，升级</h1><div class=meta>发布时间：2018-11-28 19:14</div><div class=content><blockquote><p>作者言<br>扶墙向：本篇讲述的是如何选择VPS，以及对购买完后的VPS进行测试及系统升级&mldr;&mldr;
+#VPS的选择
+如何选择VPS，第一要素自然是是看延迟咯，所以我们先上 <a href=https://www.msmbps.com/>这个</a> 网站测试下你到一些常见的VPS供应商机房的延迟，下面给张图：
+<img src=https://ws1.sinaimg.cn/large/006uw7syly1fxnytipiipj30pl0h8tcx.jpg alt></p></blockquote><p>测完延迟后就选一款适合你的&mldr;..</p><blockquote><p>测试网站的开源地址：<a href=https://github.com/msmbps/msmbps>https://github.com/msmbps/msmbps</a>
+#VPS的测试
+这里我们使用<a href=https://teddysun.com/444.html>秋水逸冰</a>大佬的一键测试脚本来进行VPS性能的测试
+命令：</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>wget -qO- bench.sh | bash
+</span></span></code></pre></div><p>或者</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl -Lso- bench.sh | bash
+</span></span></code></pre></div><p><strong>备注</strong>
+<code>bench.sh</code> 既是脚本名，同时又是域名。
+给个图：
+<img src=https://ws1.sinaimg.cn/large/006uw7syly1fxnz4r6nsaj30g20gy0xe.jpg alt>
+测试完了，感觉还可以就留着，不行的的话就该退款退款，该换就换，千万别凑活着用，给自己找不自在，最后还发工单撕&mldr;..
+#系统大版本升级
+有时候，VPS商家给的系统模板并不是最新的，这时候我们就需要手动升级下系统（本文Ubuntu向）
+首先，我们需要升级下软件包</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get update
+</span></span><span style=display:flex><span>sudo apt-get upgrade
+</span></span></code></pre></div><p>接着安装<code>update-manager-core</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install update-manager-core
+</span></span></code></pre></div><p>然后打开文件<code>/etc/update-manager/release-upgrades</code>，确认<code>Prompt</code>的值设定为<code>lts</code>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Default behavior for the release upgrader.</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>DEFAULT<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Default prompting behavior, valid options:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#  never  - Never check for a new release.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#  normal - Check to see if a new release is available.  If more than one new</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           release is found, the release upgrader will attempt to upgrade to</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           the release that immediately succeeds the currently-running</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           release.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#  lts    - Check to see if a new LTS release is available.  The upgrader</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           will attempt to upgrade to the first LTS release available after</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           the currently-running one.  Note that this option should not be</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           used if the currently-running release is not itself an LTS</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           release, since in that case the upgrader won&#39;t be able to</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#           determine if a newer release is available.</span>
+</span></span><span style=display:flex><span>Prompt<span style=color:#f92672>=</span>lts
+</span></span></code></pre></div><p>确认完毕后，我们需要处理一下可能阻碍升级的依赖关系，所以运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get dist-upgrade
+</span></span></code></pre></div><p>最后，一切准备就绪，使用Ubuntu的发行工具执行升级</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo <span style=color:#66d9ef>do</span>-release-upgrade
+</span></span></code></pre></div><p>或</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo <span style=color:#66d9ef>do</span>-release-upgrade -d
+</span></span></code></pre></div><p>至此，静待系统升级完毕，期间需要重启系统，重启完毕后，使用</p><pre tabindex=0><code>lsb_release -a
+</code></pre><p>可以看到你的系统升级后的版本</p><blockquote><p><strong>参考</strong>
+<a href=https://teddysun.com/444.html>秋水逸冰一键测试脚本bench.sh</a><br><a href=https://www.digitalocean.com/community/tutorials/how-to-upgrade-to-ubuntu-16-04-lts>How To Upgrade to Ubuntu 16.04 LTS</a><br><a href=https://www.daweibro.com/node/154>Linode VPS从Ubuntu Server 14.04LTS升级到Ubuntu Server 16.04LTS</a></p></blockquote></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

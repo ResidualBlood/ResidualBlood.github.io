@@ -1,0 +1,99 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇 - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>Hetzner 安装 Proxmox 开小鸡教程 - 安装篇</h1><div class=meta>发布时间：2021-09-13 15:21</div><div class=content><blockquote><p>此系列主要记录 Hetzner 安装 Proxmox 开小鸡的流程，主适用于宿主机为单ipv4,多ipv6，想开小鸡为 NAT ipv4 + 独立 ipv6 的情境</p></blockquote><blockquote><p>本文为此系列第一篇 主要记录 Proxmox 的安装，以及宿主机的网络配置</p></blockquote><h2 id=一准备工作>一、准备工作</h2><h3 id=1修改hostname>1.修改<code>hostname</code></h3><pre tabindex=0><code>hostnamectl set-hostname 自己设
+</code></pre><p>然后编辑<code>hosts</code></p><pre tabindex=0><code>nano /etc/hosts
+</code></pre><p>去掉 ipv6 的主机名
+<img src=https://dig4.lwnlh.com/image/2022/05/14/18-1.png alt>
+你的 ipv6 主机名为红色箭头所示，如果你上面修改了主机名，那么 ipv4 对应的主机名也要修改
+测试一下，返回宿主机的 ipv4 地址为正常</p><pre tabindex=0><code>hostname --ip-address
+</code></pre><h3 id=2开启端口转发和bbr>2.开启端口转发和BBR</h3><p>编辑<code>/etc/sysctl.conf</code>文件</p><pre tabindex=0><code>nano /etc/sysctl.conf
+</code></pre><p>加入</p><pre tabindex=0><code>net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr 
+net.ipv4.ip_forward=1
+net.ipv6.conf.all.accept_dad = 1
+net.ipv6.conf.all.accept_ra = 0
+net.ipv6.conf.all.accept_redirects = 1
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.all.autoconf = 0
+net.ipv6.conf.all.disable_ipv6 = 0
+net.ipv6.conf.all.forwarding=1
+</code></pre><p>上面两行作用开启 BBR ，下面的为开启转发
+保存生效</p><pre tabindex=0><code>sysctl -p
+</code></pre><p>然后重启宿主机</p><pre tabindex=0><code>reboot
+</code></pre><blockquote><p>如果你要编译安装 lnmp 之类的话，在一切开始之前先装完，以防翻车</p></blockquote><h2 id=二安装-proxmox>二、安装 Proxmox</h2><p>添加官方仓库</p><pre tabindex=0><code>echo &#34;deb [arch=amd64] http://download.proxmox.com/debian/pve buster pve-no-subscription&#34; &gt; /etc/apt/sources.list.d/pve-install-repo.list
+</code></pre><p>添加 GPG 密钥</p><pre tabindex=0><code>wget http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg -O /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+</code></pre><p>赋予权限</p><pre tabindex=0><code>chmod +r /etc/apt/trusted.gpg.d/proxmox-ve-release-6.x.gpg
+</code></pre><p>安装</p><pre tabindex=0><code>apt update -y &amp;&amp; apt upgrade -y 
+</code></pre><pre tabindex=0><code>apt -y install proxmox-ve postfix open-iscsi
+</code></pre><p>这个过程中可能会弹出一个postfix的配置界面，先 no，然后直接选择 Local 然后回车即可
+安装完毕后， <strong>重启！重启！重启！</strong></p><h2 id=三网络配置>三、网络配置</h2><p>网上有很多教程了，但这几天试下来，ipv4 NAT 没有问题，但独立ipv6一直不好用，有说直接 PVE 直接加一块儿 vmbr0 的网卡，然后就被HZ滥用警告了2333，最终沿袭这位老哥的思路<a href=https://www.liujason.com/article/477.html>https://www.liujason.com/article/477.html</a>，终于搞定了 ipv6 的问题，目前使用一切正常。
+下面贴一下母鸡的网络架构以及一些具体配置</p><h3 id=宿主机网络基本架构>宿主机网络基本架构</h3><ul><li>enp9s0：物理网卡，空</li><li>vmbr0：物理网卡桥接——公网IPv4+公网IPv6</li><li>vmbr1：物理vLAN网卡桥接——内网IPV4+公网IPv6（无gateway）</li></ul><h3 id=网卡具体配置>网卡具体配置</h3><p>编辑<code>/etc/network/interfaces</code></p><pre tabindex=0><code>### Hetzner Online GmbH installimage
+
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+iface lo inet6 loopback
+
+auto enp9s0
+iface enp9s0 inet manual
+#  post-up /sbin/ethtool -K enp9s0 tx off rx off
+iface enp9s0 inet6 manual
+
+auto vmbr0
+iface vmbr0 inet static
+  address 母鸡ip
+  netmask 子网掩码
+  gateway 网关ip
+  pointopoint 同上网关ip
+  hwaddress ether MAC地址
+  bridge_ports enp9s0
+  bridge_stp off
+  bridge_fd 0
+  bridge_maxwait 0
+  # post-up /sbin/ethtool -K vmbr0 tx off rx off
+
+iface vmbr0 inet6 static
+  address 母鸡v6地址  #例子 2a01:abc:abc:abc::2
+  netmask 64                #6 4或者128,看你之前的网络参数
+  gateway fe80::1         #网关
+  bridge_ports enp9s0
+  bridge_stp off
+  bridge_fd 0
+  up ip -6 route del 2a01:abc:abc:abc::/64 dev vmbr0   #这个是你母鸡ipv6的网段，含义说明下面有写
+
+auto vmbr1
+iface vmbr1 inet static
+  address 192.168.1.1
+  netmask 255.255.255.0
+  bridge_ports none
+  bridge_stp off
+  bridge_fd 0
+  post-up echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+  post-up iptables -t nat -A POSTROUTING -s &#39;192.168.1.0/24&#39; -o vmbr0 -j MASQUERADE
+  post-down iptables -t nat -D POSTROUTING -s &#39;192.168.1.0/24&#39; -o vmbr0 -j MASQUERADE
+
+auto vmbr1
+iface vmbr1 inet6 static
+  address  另一个ipv6地址 # 例子 2a01:abc:abc:abc::3/64   
+  #gateway fe80::1
+  bridge_ports none
+  bridge_stp off
+  bridge_fd 0
+  up ip -6 route add 2a01:abc:abc:abc::/64 dev vmbr1
+  post-down ip -6 route del 2a01:abc:abc:abc::/64 dev vmbr1
+</code></pre><p>解释一下一些语句的含义</p><ul><li><code>up ip -6 route add 2a01:abc:abc:abc::/64 dev vmbr1</code> 是让所有的ipv6流量走vmbr1,才能将ipv6流量转发出去</li><li><code>up ip -6 route del 2a01:abc:abc:abc::/64 dev vmbr0</code> 是将2a01:abc:abc:abc::/64从vmbr0网桥中去掉</li><li><code>post-up iptables -t nat -A POSTROUTING -s '192.168.1.0/24' -o vmbr0 -j MASQUERADE</code> 是使用 NAT
+再额外提一下</li><li><code>pre-up</code> 网卡启用前的动作</li><li><code>up</code> 启用时候的动作</li><li><code>post-up</code> 启用后的动作</li><li><code>pre-down</code> 关闭前的动作</li><li><code>down</code> 关闭时动作</li><li><code>post-down</code> 关闭后动作</li></ul><h3 id=重启网络服务>重启网络服务</h3><pre tabindex=0><code>systemctl restart networking.service
+</code></pre><p>查看网络状态</p><pre tabindex=0><code>systemctl status networking.service
+</code></pre><p>如果显示<code>Active</code>则一切正常，此时可以重启了
+如果你在配置桥接网络这块配完了重启网络服务失败但是机器还有网，那么恭喜你还可以继续折腾，也就是你还可以继续修改网卡的配置文件，但如果你想让你新修改的配置生效就得用下面这条命令强制重启 vmbr0（networking restart是没用的）：</p><pre tabindex=0><code>ifdown --force vmbr0 &amp;&amp; ifup --force vmbr0
+</code></pre><p>最后：<strong>重启！重启！重启！</strong></p><h3 id=验证>验证</h3><p>输入</p><pre tabindex=0><code>ip -6 route 
+</code></pre><p>回显如下为正常</p><pre tabindex=0><code>::1 dev lo proto kernel metric 256 pref medium
+2a01:abc:abc:abc::/64 dev vmbr1 proto kernel metric 256 linkdown pref medium
+2a01:abc:abc:abc::/64 dev vmbr1 metric 1024 linkdown pref medium
+fe80::/64 dev vmbr0 proto kernel metric 256 pref medium
+fe80::/64 dev vmbr1 proto kernel metric 256 linkdown pref medium
+default via fe80::1 dev vmbr0 metric 1024 onlink pref medium
+</code></pre><p>你也可以 Ping 一下相关地址&mldr;..</p><p>至此 Proxmox 的安装，以及相关网络配置完成，开小鸡教程将在下一篇文章记录。</p><blockquote><p>参考：</p><ul><li>荒岛：<a href=https://lala.im/4821.html>https://lala.im/4821.html</a></li><li>老赵部落：<a href=https://blog.faaoo.cn/archives/173>https://blog.faaoo.cn/archives/173</a></li><li>LiuJason&rsquo;s Blog： <a href=https://www.liujason.com/article/477.html>https://www.liujason.com/article/477.html</a></li></ul></blockquote></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

@@ -1,0 +1,70 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>利用 YouTube-dl 优雅地下载 YouTube 视频 - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>利用 YouTube-dl 优雅地下载 YouTube 视频</h1><div class=meta>发布时间：2019-01-08 17:43</div><div class=content><blockquote><p>下载的视频仅作为交流学习收藏哦，不要作为商用！</p></blockquote><hr><p>“YouTube-dl”是一个不仅可以下载YouTube视频，还可以下载哔哩哔哩等视频的命令行工具。
+其项目地址为<a href=https://github.com/rg3/youtube-dl>https://github.com/rg3/youtube-dl</a>
+在这里就说一下如何快速的上手使用～</p><p>#安装<code>ffmpeg</code>
+首先需要安装<code>ffmpeg</code>，因为<code>youtube-dl</code>下载完成后会自动调用，对视频进行封装。
+以下命令基于Ubuntu16.04</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># 添加软件源</span>
+</span></span><span style=display:flex><span>$ sudo add-apt-repository ppa:jonathonf/ffmpeg-3
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 更新并安装</span>
+</span></span><span style=display:flex><span>$ sudo apt update <span style=color:#f92672>&amp;&amp;</span> sudo apt install ffmpeg libav-tools x264 x265
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># 卸载官方源</span>
+</span></span><span style=display:flex><span>$ sudo apt autoremove
+</span></span></code></pre></div><p>如果出现<code>add-apt-repository command not found</code>
+运行下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>apt-get install software-properties-common
+</span></span></code></pre></div><p>#安装Youtube-dl
+运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl 
+</span></span><span style=display:flex><span>sudo chmod a+rx /usr/local/bin/youtube-dl
+</span></span></code></pre></div><p>这样的话<code>YouTube-dl</code>就安装完毕了，接下来是基本使用
+#直接下载视频
+命令格式为<code>youtube-dl [OPTIONS] URL [URL...]</code>
+不带任何参数，则默认下载画质、音质最好的文案。
+例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>youtube-dl <span style=color:#e6db74>&#34;https://www.youtube.com/watch?v=l4WNrvVjiTw&#34;</span>
+</span></span></code></pre></div><p>（似乎4k的视频只会下载1080p，如何选择下载分辨率见下文）
+#直接下载播放列表
+运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>youtube-dl <span style=color:#e6db74>&#34;video_url&#34;</span>
+</span></span></code></pre></div><p>小心硬盘爆炸，哈哈哈哈
+#选择合适的分辨率下载
+运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>youtube-dl -F <span style=color:#e6db74>&#34;video_url&#34;</span>
+</span></span></code></pre></div><p>查看可选的视、音频格式
+运行后会输出以下例子</p><pre tabindex=0><code>[youtube] Bey4XXJAqS8: Downloading webpage
+[youtube] Bey4XXJAqS8: Downloading video info webpage
+[info] Available formats for Bey4XXJAqS8:
+format code  extension  resolution note
+249          webm       audio only DASH audio   61k , opus @ 50k, 11.46MiB
+250          webm       audio only DASH audio   82k , opus @ 70k, 15.43MiB
+171          webm       audio only DASH audio  110k , vorbis@128k, 21.97MiB
+140          m4a        audio only DASH audio  129k , m4a_dash container, mp4a.40.2@128k, 26.91MiB
+251          webm       audio only DASH audio  156k , opus @160k, 29.94MiB
+278          webm       256x144    144p  101k , webm container, vp9, 30fps, video only, 16.33MiB
+394          mp4        256x144    144p  107k , av01.0.05M.08, 30fps, video only, 14.61MiB
+160          mp4        256x144    144p  115k , avc1.4d400c, 30fps, video only, 11.04MiB
+242          webm       426x240    240p  233k , vp9, 30fps, video only, 31.57MiB
+395          mp4        426x240    240p  250k , av01.0.05M.08, 30fps, video only, 29.34MiB
+133          mp4        426x240    240p  252k , avc1.4d4015, 30fps, video only, 22.91MiB
+396          mp4        640x360    360p  437k , av01.0.05M.08, 30fps, video only, 54.59MiB
+243          webm       640x360    360p  448k , vp9, 30fps, video only, 60.07MiB
+134          mp4        640x360    360p  735k , avc1.4d401e, 30fps, video only, 64.87MiB
+244          webm       854x480    480p  804k , vp9, 30fps, video only, 109.78MiB
+397          mp4        854x480    480p  838k , av01.0.05M.08, 30fps, video only, 100.78MiB
+135          mp4        854x480    480p 1356k , avc1.4d401f, 30fps, video only, 131.16MiB
+247          webm       1280x720   720p 1755k , vp9, 30fps, video only, 227.80MiB
+398          mp4        1280x720   720p 1794k , av01.0.05M.08, 30fps, video only, 209.23MiB
+136          mp4        1280x720   720p 2697k , avc1.4d401f, 30fps, video only, 260.78MiB
+248          webm       1920x1080  1080p 3236k , vp9, 30fps, video only, 414.56MiB
+137          mp4        1920x1080  1080p 4752k , avc1.640028, 30fps, video only, 481.99MiB
+271          webm       2560x1440  1440p 9041k , vp9, 30fps, video only, 1.18GiB
+313          webm       3840x2160  2160p 18002k , vp9, 30fps, video only, 2.76GiB
+17           3gp        176x144    small   70k , mp4v.20.3, mp4a.40.2@ 24k (22050Hz), 14.93MiB
+36           3gp        320x180    small  202k , mp4v.20.3, mp4a.40.2 (22050Hz), 42.88MiB
+43           webm       640x360    medium , vp8.0, vorbis@128k, 148.66MiB
+18           mp4        640x360    medium  552k , avc1.42001E, mp4a.40.2@ 96k (44100Hz), 116.91MiB
+22           mp4        1280x720   hd720 1357k , avc1.64001F, mp4a.40.2@192k (44100Hz) (best)
+</code></pre><p>在这里我们可以看到，默认<code>best</code>选择的是第22个，只有720p的分辨率，所以在这里想下载4k的视频话，在这了需要运行</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>youtube-dl -f <span style=color:#e6db74>&#39;313+251&#39;</span> <span style=color:#e6db74>&#34;video_url&#34;</span>
+</span></span></code></pre></div><ul><li><code>'313+251'</code>：<code>313</code>是视频编号，<code>251</code>是音频编号</li><li><code>"video_url"</code>是你的视频地址
+这样，就可以下载你想要的分辨率的视频。
+好了，如果有什么问题欢迎下面评论～</li></ul></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

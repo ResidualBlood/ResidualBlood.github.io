@@ -1,0 +1,198 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>自建 Clash 订阅转换 - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>自建 Clash 订阅转换</h1><div class=meta>发布时间：2020-12-22 20:45</div><div class=content><blockquote><p>本文主要说明Clash订阅转换：Docker搭建后端处理subconverter，以及前端Sub-Web，并利用Nginx反代</p></blockquote><blockquote><p>2020年12月23日更新：利用<code>Docker-compose</code>一键部署</p></blockquote><h2 id=一准备工作>一、准备工作</h2><p>首先，你需要两个域名，一个给前端，一个给后端使用，本文举例后端：<code>suc.test.com</code>，前端：<code>sub.test.com</code></p><h2 id=二搭建后端subconverter>二、搭建后端subconverter</h2><blockquote><p>原始项目地址：<a href=https://github.com/tindy2013/subconverter>https://github.com/tindy2013/subconverter</a></p></blockquote><blockquote><p>修改项目地址：<a href=https://github.com/stilleshan/subconverter>https://github.com/stilleshan/subconverter</a></p></blockquote><p>后者相对于原版修改了以下部分：</p><ul><li>去除<code>自动选择 url-test</code>以解决连接数爆涨问题.</li><li><code>全球拦截</code>增加<code>节点选择</code>,以解决<code>Google Analytics</code>的访问需求.</li><li>修改时区 镜像默认时区为<code>Asia/Shanghai</code></li></ul><h3 id=docker启动>Docker启动</h3><p>Clone至本地</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/stilleshan/subconverter.git
+</span></span></code></pre></div><p>修改 <code>pref.ini</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>api_access_token<span style=color:#f92672>=</span><span style=color:#ae81ff>123456</span>                     <span style=color:#75715e>#随意设置</span>
+</span></span><span style=display:flex><span>managed_config_prefix<span style=color:#f92672>=</span>https://suc.test.com  <span style=color:#75715e>#设置成后端域名</span>
+</span></span><span style=display:flex><span>listen<span style=color:#f92672>=</span>127.0.0.1                            <span style=color:#75715e>#这里改成 127.0.0.1 进行反代</span>
+</span></span></code></pre></div><p>重新构建、启动</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>docker build -t stilleshan/subconverter:latest .
+</span></span><span style=display:flex><span>docker run  -d --name<span style=color:#f92672>=</span>subconverter --restart<span style=color:#f92672>=</span>always -p 25500:25500 stilleshan/subconverter:latest
+</span></span></code></pre></div><h3 id=nginx反代>Nginx反代</h3><p>将以下配置写入你的网站<code>conf</code>中，本文例子为：<code>suc.test.com.conf</code>，<code>Oneinstack</code>默认网站配置路径为<code>/usr/local/nginx/conf/vhost</code></p><pre tabindex=0><code>location / {
+			proxy_pass       http://0.0.0.0:25500;
+			proxy_set_header Host      $host;
+			proxy_set_header X-Real-IP $remote_addr;
+		}
+</code></pre><p>然后重载Nginx：<code>service nginx reload</code>
+最后打开测试：<code>https://suc.test.com/sub?target=clash&amp;url=sub_url</code>
+实际上转换只使用后端就足够了，但为了偷懒以及方便选择不同配置还是继续搭建前端</p><h2 id=三搭建前端sub-web>三、搭建前端Sub-Web</h2><blockquote><p>项目地址：<a href=https://github.com/CareyWang/sub-web>https://github.com/CareyWang/sub-web</a></p></blockquote><p>这里主要说一下如何添加<code>ACL4SSR</code>配置、自定义配置，简要说明安装过程</p><h3 id=下载>下载</h3><p>Clone至本地</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>git clone https://github.com/CareyWang/sub-web.git
+</span></span></code></pre></div><h3 id=修改相关配置>修改相关配置</h3><p>修改<code>/sub-web/src/views/Subconverter.vue</code>文件
+找到大约在257行 <code>backendOptions:</code>，替换后面的 <code>http://127.0.0.1:25500/sub?</code>为<code>https://sub.test.com/sub?</code>
+找到下面<code>RemoteConfig:[</code>，这是自定义规则地址的地方其结构为：</p><pre tabindex=0><code>          {
+            label: &#34;第一个label&#34;, 
+            options: [
+              {
+                label: &#34;第二个label&#34;,
+                value:
+                  &#34;第二个label的具体地址&#34;
+              }
+            ]
+          },
+</code></pre><p>对应下图：
+<img src=https://dig4.lwnlh.com/images/2020/12/22/2020-12-22_20-27.png alt>
+这里添加<code>ACL4SSR</code>的规则配置，只需要将以下配置粘贴过来即可，也可以参照上面结构加入自定义配置</p><pre tabindex=0><code>        {
+            label: &#34;ACL4SSR&#34;,
+            options: [
+              {
+                label: &#34;ACL4SSR_Online 默认版 分组比较全 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Mini 精简版 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)&#34;,
+                value:
+                  &#34;https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR 本地 默认版 分组比较全&#34;,
+                value: &#34;config/ACL4SSR.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Mini 本地 精简版&#34;,
+                value: &#34;config/ACL4SSR_Mini.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速&#34;,
+                value: &#34;config/ACL4SSR_Mini_NoAuto.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback&#34;,
+                value: &#34;config/ACL4SSR_Mini_Fallback.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_BackCN 本地 回国&#34;,
+                value: &#34;config/ACL4SSR_BackCN.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_NoApple 本地 无苹果分流&#34;,
+                value: &#34;config/ACL4SSR_NoApple.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_NoAuto 本地 无自动测速 &#34;,
+                value: &#34;config/ACL4SSR_NoAuto.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_NoAuto_NoApple 本地 无自动测速&amp;无苹果分流&#34;,
+                value: &#34;config/ACL4SSR_NoAuto_NoApple.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_NoMicrosoft 本地 无微软分流&#34;,
+                value: &#34;config/ACL4SSR_NoMicrosoft.ini&#34;
+              },
+              {
+                label: &#34;ACL4SSR_WithGFW 本地 GFW列表&#34;,
+                value: &#34;config/ACL4SSR_WithGFW.ini&#34;
+              }
+            ]
+          },
+</code></pre><h3 id=安装依赖与打包发布>安装依赖与打包发布</h3><p>这里需要安装 <code>Node</code> 与 <code>Yarn</code>
+你可以通过以下命令查看是否安装成功</p><pre tabindex=0><code>node -v
+yarn -v
+</code></pre><p>安装构建依赖项</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>yarn install
+</span></span></code></pre></div><p>使用 webpack 运行 Web 客户端以进行本地开发</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>yarn serve
+</span></span></code></pre></div><p>浏览器访问 <a href=http://xn--ip-fr5c86lx7z:8080/>http://服务器ip:8080/</a> 应该可以进行前端 sub-web 的预览了。</p><p>打包</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>yarn build
+</span></span></code></pre></div><p>将生成的 <code>dist</code> 目录复制到你的网站目录下，修改网站 <code>conf</code>的 <code>root</code>位置，后加 <code>/dist</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>root /root/sub-web/dist;
+</span></span></code></pre></div><h2 id=四docker-compose一键部署>四、Docker-compose一键部署</h2><blockquote><p>参考Yohane聚聚博客：<a href=https://yohane.art/development%20notes/2020/12/23/subc.html>https://yohane.art/development%20notes/2020/12/23/subc.html</a></p></blockquote><h3 id=创建配置文件>创建配置文件</h3><p>新建<code>/root/nginx/conf.d/server.conf</code>文件，写入以下配置</p><pre tabindex=0><code>!/root/nginx/conf.d/server.conf
+	
+# vhost of subc with proxy
+	
+server {
+        listen 80;
+        server_name &lt;domain&gt;;
+        location / {
+                proxy_pass http://subc:25500;
+        }
+}
+
+server {
+        listen 80;
+        server_name &lt;domain&gt;;
+        location / {
+                proxy_pass http://subweb;
+        }        
+}
+</code></pre><p>新建<code>/root/subconverter/docker-compose.yml</code>文件，写入以下配置</p><pre tabindex=0><code>!/root/subconverter/docker-compose.yml
+
+version: &#34;3&#34;
+
+services:
+  subc:
+    hostname: subc
+    restart: always
+    container_name: subc
+    image: tindy2013/subconverter:latest
+  subweb:
+    hostname: subweb
+    restart: always
+    container_name: subweb
+    image: careywong/subweb:latest
+  nginx:
+    hostname: nginx
+    restart: always
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - &#34;80:80&#34;
+      - &#34;443:443&#34;
+    links:
+      - &#34;subc:subc&#34;
+      - &#34;subweb:subweb&#34;
+    volumes:
+      - /root/nginx/conf.d:/etc/nginx/conf.d
+</code></pre><h3 id=启动>启动</h3><pre tabindex=0><code>docker-compose -d
+</code></pre><h2 id=五总结>五、总结</h2><p>至此，你的Clash订阅转换就搭建好了，如果觉得<code>ALC4ALL</code>默认的配置文件不适合你，也可以在此基础上魔改出适合自己的规则，并时刻与<code>ALC4ALL</code>更新的规则同步，这将在后续文章中讲述。</p></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

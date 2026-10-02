@@ -1,0 +1,53 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Clash 自定义分流规则 - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>Clash 自定义分流规则</h1><div class=meta>发布时间：2020-12-22 22:10</div><div class=content><blockquote><p>本文主要讲述如何在<code>ACL4SSR</code>的Clash规则基础上魔改出适合自己的规则配置文件，并方便前文订阅转换的调用<br><code>ACL4SSR</code>项目地址：<a href=https://github.com/ACL4SSR/ACL4SSR/tree/master>https://github.com/ACL4SSR/ACL4SSR/tree/master</a></p></blockquote><h2 id=目录结构>目录结构</h2><p><code>ACL4ALL</code>目录结构如下所示，这里我们主要关注<code>Clash</code>目录下的<code>Ruleset</code>目录，以及<code>config</code>目录，其中：</p><ul><li><code>*.list</code>文件，这是域名/IP列表</li><li><code>*.ini</code>文件，为分组相关的配置文件</li></ul><pre tabindex=0><code>.
+├── Clash
+│   ├── config
+│   ├── Providers
+│   │   └── Ruleset
+│   └── Ruleset
+└── Tool
+    ├── Surge转acl工具
+    └── SwitchyOmega
+</code></pre><h2 id=ini文件结构><code>*.ini</code>文件结构</h2><p>打开<code>config</code>目录下的<code>ACL4SSR_Online_Full_AdblockPlus.ini</code>文件
+其大致结构为</p><pre tabindex=0><code>[custom]
+;不要随意改变关键字，否则会导致出错
+;acl4SSR规则
+
+;去广告：支持
+;自动测速：支持
+;微软分流：支持
+;苹果分流：支持
+;增强中国IP段：支持
+;增强国外GFW：支持
+
+;设置规则标志位
+surge_ruleset=全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+......
+surge_ruleset=全球直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+surge_ruleset=全球直连,[]GEOIP,CN
+surge_ruleset=漏网之鱼,[]FINAL
+;设置规则标志位
+
+;设置分组标志位
+custom_proxy_group=节点选择`select`[]自动选择`[]故障转移`[]负载均衡`[]香港节点`[]台湾节点`[]狮城节点`[]日本节点`[]美国节点`[]韩国节点`[]手动切换`[]DIRECT
+custom_proxy_group=手动切换`select`.*
+custom_proxy_group=自动选择`url-test`.*`http://www.gstatic.com/generate_204`300
+custom_proxy_group=故障转移`fallback`.*`http://www.gstatic.com/generate_204`300
+custom_proxy_group=负载均衡`load-balance`.*`http://www.gstatic.com/generate_204`300
+custom_proxy_group=电报消息`select`[]节点选择`[]自动选择`[]狮城节点`[]香港节点`[]台湾节点`[]日本节点`[]美国节点`[]韩国节点`[]手动切换`[]DIRECT
+......
+custom_proxy_group=韩国节点`url-test`(KR|Korea|KOR|首尔|韩|韓)`http://www.gstatic.com/generate_204`300
+custom_proxy_group=奈飞节点`select`(NF|奈飞|解锁|Netflix|NETFLIX|Media)
+;设置分组标志位
+
+enable_rule_generator=true
+overwrite_original_rules=true
+
+;clash_rule_base=https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GeneralClashConfig.yml
+
+;luck
+</code></pre><p>其中：</p><ul><li><code>;</code>后为注释</li><li><code>surge_ruleset=全球直连,https://xx.list</code>:<code>surge_ruleset</code>声明规则列表；<code>全球直连</code>为分组名称；<code>https://xx.list</code>为规则列表地址，一般为Github的<code>RAW</code>地址，如上格式</li><li>custom_proxy_group=节点选择`select`[]自动选择 : <code>custom_proxy_group</code>声明自定义分组；<code>节点选择</code>为分组名称；`select为选择模式</li><li>分组模式：<ul><li>`select：选择模式，后加分组或者节点</li><li>`url-test：自动测速模式,选择速度最快的节点，后加节点</li><li>`fallback:故障转移，后加节点</li><li>`load-balance，后加节点</li></ul></li><li>(NF|奈飞)：筛选出包含括号内关键字的节点，例如上面的<code>奈飞节点</code></li></ul><h2 id=自定义配置>自定义配置</h2><p>fork<code>ACL4SSR</code>的仓库，然后拉取到你本地参照上面<code>ACL4SSR_Online_Full_AdblockPlus.ini</code>添加删除修改相关行进行魔改即可，这里说明几点需要注意的地方：</p><ol><li>Clash匹配规则是从上至下的，因此，需要将你自定义的规则放在<code>surge_ruleset</code>的最前面</li><li>规则文件中可能会产生相同IP/域名不同规则的情况，但因为匹配规则从上至下的原因，不要认为规则出现错误，重复只是因为方便作者维护</li><li>检查分组是否正确，不要出现不存在的分组</li><li>使用机场的同学可以直接将<code>负载均衡</code>分组删除，因为会造成连接数爆炸，同理，<code>自动测试</code>也少用比较好</li></ol><h2 id=总结>总结</h2><p>Clash分流规则不同人有不同需求，适合自己才是最好的～
+下一篇文章将说明：<code>ACL4SSR</code>规则更新后如何同步到自己fork的仓库并且不损失自己的配置，实际上就是版本合并啦～</p></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>

@@ -1,0 +1,222 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(下) - 爱世界 N</title><style>:root{--bg:#0d1117;--text:#c9d1d9;--accent:#58a6ff;--border:#30363d;--card-bg:#161b22}body{font-family:-apple-system,BlinkMacSystemFont,segoe ui,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;line-height:1.6}header{padding:2rem 1rem;text-align:center;border-bottom:1px solid var(--border)}header h1 a{color:var(--text);text-decoration:none}nav a{margin:0 1rem;color:var(--accent);text-decoration:none}main{max-width:800px;margin:2rem auto;padding:0 1rem}article{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:2rem}article h2 a{color:var(--accent);text-decoration:none}.meta{color:#8b949e;font-size:.875rem;margin-bottom:1rem}footer{text-align:center;padding:2rem;color:#8b949e;border-top:1px solid var(--border)}</style><link rel=stylesheet href=/plugins/pio/pio.css></head><body><header><h1><a href=/>爱世界 N</a></h1><nav><a href=/>首页</a>
+<a href=/about/>关于我</a>
+<a href=/youlian/>友链</a>
+<a href=/liuyan/>留言板</a>
+<a href=/guidang/>归档</a></nav></header><main><article><h1>伪 NAS 利用 VPS 实现备份、下载、串流播放一条龙(下)</h1><div class=meta>发布时间：2018-12-08 13:37</div><div class=content><blockquote><p>本片讲述挂载Google Drive扩展你的VPS硬盘并把Aria2下载后的文件自动上传到Google Drive中等玩法。</p></blockquote><p>##一、安装rclone</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>curl https://rclone.org/install.sh | sudo bash
+</span></span></code></pre></div><p>##二、初始化配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>rclone config
+</span></span></code></pre></div><p>按照下面选择走：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>Current remotes:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Name                 Type
+</span></span><span style=display:flex><span><span style=color:#f92672>====</span>                 <span style=color:#f92672>====</span>
+</span></span><span style=display:flex><span>gdrive               drive
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>e<span style=color:#f92672>)</span> Edit existing remote
+</span></span><span style=display:flex><span>n<span style=color:#f92672>)</span> New remote
+</span></span><span style=display:flex><span>d<span style=color:#f92672>)</span> Delete remote
+</span></span><span style=display:flex><span>r<span style=color:#f92672>)</span> Rename remote
+</span></span><span style=display:flex><span>c<span style=color:#f92672>)</span> Copy remote
+</span></span><span style=display:flex><span>s<span style=color:#f92672>)</span> Set configuration password
+</span></span><span style=display:flex><span>q<span style=color:#f92672>)</span> Quit config
+</span></span><span style=display:flex><span>e/n/d/r/c/s/q&gt; n   这里输入n，新建一个
+</span></span><span style=display:flex><span>name&gt; test         输入一个名字，记住之后会用到
+</span></span><span style=display:flex><span>Type of storage to configure.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>Choose a number from below, or type in your own value
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>1</span> / Alias <span style=color:#66d9ef>for</span> a existing remote
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;alias&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>2</span> / Amazon Drive
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;amazon cloud drive&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>3</span> / Amazon S3 Compliant Storage Providers <span style=color:#f92672>(</span>AWS, Ceph, Dreamhost, IBM COS, Minio<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;s3&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>4</span> / Backblaze B2
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;b2&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>5</span> / Box
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;box&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>6</span> / Cache a remote
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;cache&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>7</span> / Dropbox
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;dropbox&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>8</span> / Encrypt/Decrypt a remote
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;crypt&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>9</span> / FTP Connection
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;ftp&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>10</span> / Google Cloud Storage <span style=color:#f92672>(</span>this is not Google Drive<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;google cloud storage&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>11</span> / Google Drive
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>12</span> / Hubic
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;hubic&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>13</span> / JottaCloud
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;jottacloud&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>14</span> / Local Disk
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;local&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>15</span> / Mega
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;mega&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>16</span> / Microsoft Azure Blob Storage
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;azureblob&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>17</span> / Microsoft OneDrive
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;onedrive&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>18</span> / OpenDrive
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;opendrive&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>19</span> / Openstack Swift <span style=color:#f92672>(</span>Rackspace Cloud Files, Memset Memstore, OVH<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;swift&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>20</span> / Pcloud
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;pcloud&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>21</span> / QingCloud Object Storage
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;qingstor&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>22</span> / SSH/SFTP Connection
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;sftp&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>23</span> / Webdav
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;webdav&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>24</span> / Yandex Disk
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;yandex&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>25</span> / http Connection
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;http&#34;</span>
+</span></span><span style=display:flex><span>Storage&gt; <span style=color:#ae81ff>11</span>           输入11
+</span></span><span style=display:flex><span>Google Application Client Id
+</span></span><span style=display:flex><span>Leave blank normally.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>client_id&gt;            直接回车
+</span></span><span style=display:flex><span>Google Application Client Secret
+</span></span><span style=display:flex><span>Leave blank normally.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>client_secret&gt;        直接回车
+</span></span><span style=display:flex><span>Scope that rclone should use when requesting access from drive.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>Choose a number from below, or type in your own value
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>1</span> / Full access all files, excluding Application Data Folder.
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>2</span> / Read-only access to file metadata and file contents.
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive.readonly&#34;</span>
+</span></span><span style=display:flex><span>   / Access to files created by rclone only.
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>3</span> | These are visible in the drive website.
+</span></span><span style=display:flex><span>   | File authorization is revoked when the user deauthorizes the app.
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive.file&#34;</span>
+</span></span><span style=display:flex><span>   / Allows read and write access to the Application Data folder.
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>4</span> | This is not visible in the drive website.
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive.appfolder&#34;</span>
+</span></span><span style=display:flex><span>   / Allows read-only access to file metadata but
+</span></span><span style=display:flex><span> <span style=color:#ae81ff>5</span> | does not allow any access to read or download file content.
+</span></span><span style=display:flex><span>   <span style=color:#ae81ff>\ </span><span style=color:#e6db74>&#34;drive.metadata.readonly&#34;</span>
+</span></span><span style=display:flex><span>scope&gt; <span style=color:#ae81ff>1</span>           输入1
+</span></span><span style=display:flex><span>ID of the root folder
+</span></span><span style=display:flex><span>Leave blank normally.
+</span></span><span style=display:flex><span>Fill in to access <span style=color:#e6db74>&#34;Computers&#34;</span> folders. <span style=color:#f92672>(</span>see docs<span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>root_folder_id&gt;     直接回车
+</span></span><span style=display:flex><span>Service Account Credentials JSON file path 
+</span></span><span style=display:flex><span>Leave blank normally.
+</span></span><span style=display:flex><span>Needed only <span style=color:#66d9ef>if</span> you want use SA instead of interactive login.
+</span></span><span style=display:flex><span>Enter a string value. Press Enter <span style=color:#66d9ef>for</span> the default <span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>)</span>.
+</span></span><span style=display:flex><span>service_account_file&gt;     直接回车
+</span></span><span style=display:flex><span>Edit advanced config? <span style=color:#f92672>(</span>y/n<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>y<span style=color:#f92672>)</span> Yes
+</span></span><span style=display:flex><span>n<span style=color:#f92672>)</span> No
+</span></span><span style=display:flex><span>y/n&gt; n                    输入n
+</span></span><span style=display:flex><span>Remote config
+</span></span><span style=display:flex><span>Use auto config?
+</span></span><span style=display:flex><span> * Say Y <span style=color:#66d9ef>if</span> not sure
+</span></span><span style=display:flex><span> * Say N <span style=color:#66d9ef>if</span> you are working on a remote or headless machine or Y didn<span style=color:#e6db74>&#39;t work
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>y) Yes
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>n) No
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>y/n&gt; n                    输入n
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>If your browser doesn&#39;</span>t open automatically go to the following link: https://accounts.google.com/o/oauth2/auth?access_type<span style=color:#f92672>=</span>offline&amp;client_id<span style=color:#f92672>=</span>xxxxxxxxxxxxxxxxxxxxxxxxxx
+</span></span><span style=display:flex><span>这里会给你一个链接，打开后用你的Google Drive授权就会得到下面一串代码填入即可
+</span></span><span style=display:flex><span>Log in and authorize rclone <span style=color:#66d9ef>for</span> access
+</span></span><span style=display:flex><span>Enter verification code&gt; 4/rQDL5M58Dv_Mjwxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span></span><span style=display:flex><span>Configure this as a team drive?
+</span></span><span style=display:flex><span>y<span style=color:#f92672>)</span> Yes
+</span></span><span style=display:flex><span>n<span style=color:#f92672>)</span> No
+</span></span><span style=display:flex><span>y/n&gt; y                    输入y
+</span></span><span style=display:flex><span>Fetching team drive list...
+</span></span><span style=display:flex><span>No team drives found in your account--------------------
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>test<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>type <span style=color:#f92672>=</span> drive
+</span></span><span style=display:flex><span>scope <span style=color:#f92672>=</span> drive
+</span></span><span style=display:flex><span>token <span style=color:#f92672>=</span> <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;access_token&#34;</span>:<span style=color:#e6db74>&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span>,<span style=color:#e6db74>&#34;token_type&#34;</span>:<span style=color:#e6db74>&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span>,<span style=color:#e6db74>&#34;expiry&#34;</span>:<span style=color:#e6db74>&#34;2018-12-08T14:45:49.328865767+08:00&#34;</span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>--------------------
+</span></span><span style=display:flex><span>y<span style=color:#f92672>)</span> Yes this is OK
+</span></span><span style=display:flex><span>e<span style=color:#f92672>)</span> Edit this remote
+</span></span><span style=display:flex><span>d<span style=color:#f92672>)</span> Delete this remote
+</span></span><span style=display:flex><span>y/e/d&gt; y                 输入y
+</span></span><span style=display:flex><span>Current remotes:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Name                 Type
+</span></span><span style=display:flex><span><span style=color:#f92672>====</span>                 <span style=color:#f92672>====</span>
+</span></span><span style=display:flex><span>gdrive               drive
+</span></span><span style=display:flex><span>test                 drive
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>e<span style=color:#f92672>)</span> Edit existing remote
+</span></span><span style=display:flex><span>n<span style=color:#f92672>)</span> New remote
+</span></span><span style=display:flex><span>d<span style=color:#f92672>)</span> Delete remote
+</span></span><span style=display:flex><span>r<span style=color:#f92672>)</span> Rename remote
+</span></span><span style=display:flex><span>c<span style=color:#f92672>)</span> Copy remote
+</span></span><span style=display:flex><span>s<span style=color:#f92672>)</span> Set configuration password
+</span></span><span style=display:flex><span>q<span style=color:#f92672>)</span> Quit config
+</span></span><span style=display:flex><span>e/n/d/r/c/s/q&gt; q             输入q退出
+</span></span></code></pre></div><p>##三、挂载
+###1.手动挂载</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#新建本地文件夹，路径自己定，即下面的LocalFolder</span>
+</span></span><span style=display:flex><span>mkdir /root/GoogleDrive
+</span></span><span style=display:flex><span><span style=color:#75715e>#挂载为磁盘，下面的DriveName、Folder、LocalFolder参数根据说明自行替换</span>
+</span></span><span style=display:flex><span>rclone mount DriveName:Folder LocalFolder --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask <span style=color:#ae81ff>000</span>
+</span></span></code></pre></div><p>###2.开机自动挂载
+新建 <code>/lib/systemd/system/rclone.service</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>nano /lib/systemd/system/rclone.service
+</span></span></code></pre></div><p>写入，注意 <code>gdrive</code>后最好跟盘内的文件夹</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description <span style=color:#f92672>=</span> rclone
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>   
+</span></span><span style=display:flex><span>User <span style=color:#f92672>=</span> root
+</span></span><span style=display:flex><span>ExecStart <span style=color:#f92672>=</span> /usr/bin/rclone mount gdrive: /mnt/gdrive --copy-links --no-gzip-encoding --no-check-certificate --allow-other --allow-non-empty --umask <span style=color:#ae81ff>000</span> 
+</span></span><span style=display:flex><span>Restart <span style=color:#f92672>=</span> on-abort
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy <span style=color:#f92672>=</span> multi-user.target
+</span></span></code></pre></div><p>重载daemon</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl daemon-reload
+</span></span></code></pre></div><p>启动Rclone</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl start rclone
+</span></span></code></pre></div><p>设置开机自启</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl enable rclone
+</span></span></code></pre></div><p>##二、Aria2下载完后自动上传
+这里用到了Aria2的一个<code>on-download-complete</code>功能，这个功能可以做很多事情，这里只用到了自动上传
+新建脚本文件<code>gdupload.sh</code>，并复制下面代码:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></span><span style=display:flex><span>path<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$3<span style=color:#e6db74>&#34;</span> <span style=color:#75715e>#取原始路径</span>
+</span></span><span style=display:flex><span>downloadpath<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/data/wwwroot/dd.test.com/download&#39;</span> <span style=color:#75715e>#下载目录</span>
+</span></span><span style=display:flex><span>rclone<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;/data/wwwroot/dd.test.com/cloud&#39;</span>   <span style=color:#75715e>#rclone挂载的目录</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> $2 -eq <span style=color:#ae81ff>0</span> <span style=color:#f92672>]</span> <span style=color:#75715e>#下载文件为0跳出脚本</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>                exit <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> true; <span style=color:#66d9ef>do</span>  <span style=color:#75715e>#提取下载文件根路径</span>
+</span></span><span style=display:flex><span>    filepath<span style=color:#f92672>=</span>$path
+</span></span><span style=display:flex><span>    path<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>path%/*<span style=color:#e6db74>}</span>; 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$path<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;</span>$downloadpath<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#f92672>[</span> $2 -eq <span style=color:#ae81ff>1</span> <span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>        rclone<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>filepath/#$downloadpath/$rclone<span style=color:#e6db74>}</span> <span style=color:#75715e>#替换路径</span>
+</span></span><span style=display:flex><span>        cp -R <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>filepath<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>rclone<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        exit <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>elif</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$path<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;</span>$downloadpath<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>   <span style=color:#75715e>#文件夹</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>        cp -R <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>filepath<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>rclone<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>/
+</span></span><span style=display:flex><span>        exit <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span></code></pre></div><p><strong>注意：本脚本上传下载文件后并没有删除原文件，因为rclone在上传多文件时，可能会丢文件，所以这个脚本并没有删除原文件</strong>
+如果想要自动删除的话，可以改成下面这样子：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>.....................前面不变
+</span></span><span style=display:flex><span>     rclone<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>filepath/#$downloadpath/$rclone<span style=color:#e6db74>}</span> <span style=color:#75715e>#替换路径</span>
+</span></span><span style=display:flex><span>        mv -f <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>filepath<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>rclone<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        exit <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>elif</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$path<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;</span>$downloadpath<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span> <span style=color:#75715e>#文件夹</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>        mv -f <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>filepath<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>rclone<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>/
+</span></span><span style=display:flex><span>        rm -rf <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>filepath<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>        exit <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>done</span>
+</span></span></code></pre></div><p>###修改Aria2配置文件
+首先授权<code>chmod +x gdupload.sh</code>然后再到Aria2配置文件中加上一行<code>on-download-complete=/root/gdupload.sh</code>即可，后面为脚本的路径。
+##三、Nextcloud添加外置存储
+由于我们已经把Google Drive挂载到本地了，所以我们直接添加外置存储即可
+首先在Nextcloud中安装<code>外部存储</code>插件
+选择<code>应用</code>-<code>External storage support</code>-<code>启用</code>即可
+接着<code>设置</code>-<code>外部存储</code>按图所示添加即可
+<img src=https://ws1.sinaimg.cn/large/006uw7syly1fxzb3awhgkj31mz053zkn.jpg alt></p><blockquote><p>参考<br><a href=https://www.moerats.com/archives/482/>使用Aira2下载文件后自动上传到Google Drive网盘</a></p></blockquote></div></article><div id=comments style=margin-top:2rem><script src=https://giscus.app/client.js data-repo=ResidualBlood/lwnlh_blog data-repo-id=R_kgDOHjFcBw data-category=Announcements data-category-id=DIC_kwDOHjFcB84DG2zo data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=dark data-lang=zh-CN crossorigin=anonymous async></script></div></main><footer><p>&copy; 2026 ResidualBlood. Powered by Hugo (Latest).</p></footer><div class="pio-container left"><div class=pio-action></div><canvas id=pio width=280 height=250></canvas></div><script src=/plugins/pio/l2d.js></script><script src=/plugins/pio/pio.js></script><script>(function(){if(window.innerWidth<=768)return;new Paul_Pio({mode:"fixed",hidden:!0,content:{welcome:["欢迎光临！","今天过得怎么样？"],touch:["你在干嘛呢？","别动手动脚的~","Hentai!"]},model:["/plugins/pio/models/pio/model.json","/plugins/pio/models/kangna/model.json"]})})()</script><script src=/plugins/snow/snow.js></script></body></html>
