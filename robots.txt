@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://hugo.lwnlh.com/sitemap.xml
